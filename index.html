@@ -567,7 +567,19 @@
    make the matching Current Work dots glow.
    Pillars: A=Analytics  B=Automations  C=Agents  D=R&D  E=Tech Hold. */
 const UPDATES=[
-  {date:"2026-06-15",type:"new",net:"current",scope:"R&D",title:"Sallaum Executive App is live",
+  {date:"2026-06-29",type:"new",net:"current",scope:"Tech Hold",title:"Real Estate App is live",
+   note:"AI-integrated real estate platform — now linked from the Tech Hold pillar.",
+   color:"#2563EB",nodes:["E:Real Estate App"]},
+  {date:"2026-06-29",type:"new",net:"current",scope:"Automations",title:"Freight Department App is live",
+   note:"Gouts / Pointe Noire entry and Mercedes OEM bookings grouped into one linked app.",
+   color:"#0E8C6B",nodes:["B::Freight Department App"]},
+  {date:"2026-06-29",type:"mod",net:"current",scope:"Agents",title:"SMC Report Agent linked",
+   note:"The SMC Report Agent dot now opens its live app.",
+   color:"#E07B1A",nodes:["C:SMC Report Agent"]},
+  {date:"2026-06-29",type:"new",net:"current",scope:"R&D",title:"Azure Apps added",
+   note:"Azure-hosted internal app portal added to the R&D pillar.",
+   color:"#6D5BD0",nodes:["D:Azure Apps"]},
+  {date:"2026-06-29",type:"new",net:"current",scope:"R&D",title:"Sallaum Executive App is live",
    note:"Executive app bringing the unit's key reports and insights into one place for leadership — now linked from the map.",
    color:"#6D5BD0",nodes:["D:Sallaum Executive App"]},
   {date:"2026-06-15",type:"new",net:"current",scope:"Agents",title:"Forecast & Scheduling agents in build",
@@ -640,7 +652,10 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     // "Investment Portfolio Monitor":"https://wealthpathapp.netlify.app/",  // hidden for now
     "Corporate Finance App":"https://corporatewealthpathapp.netlify.app/",
     "Personal Budgeting App":"https://wealthpathpersonal.netlify.app/",
-    "Sallaum Executive App":"https://wonderful-field-065481810.7.azurestaticapps.net/"
+    "Sallaum Executive App":"https://wonderful-field-065481810.7.azurestaticapps.net/",
+    "Real Estate App":"https://salmon-beach-00b773a10.7.azurestaticapps.net/",
+    "SMC Report Agent":"https://witty-sea-070a6c710.7.azurestaticapps.net",
+    "Azure Apps":"https://wonderful-field-065481810.7.azurestaticapps.net/"
   };
   const DESC={
     A:"Data extraction, modelling and Power BI reporting.",
@@ -668,7 +683,7 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     "More Data-Entry Automations":"Additional data-entry automation solutions across departments.",
     "Stowage Optimization":"Research into optimal RoRo deck allocation across mixed cargo.",
     "Document Intelligence Pipeline":"Reusable classify-extract-route intake layer that every agent and automation plugs into.",
-    "Real Estate Platform":"AI-integrated real estate platform.",
+    "Real Estate App":"AI-integrated real estate platform — live.",
     "Claims CRM System":"Dedicated claims CRM system for end-to-end claim handling.",
     "HR System":"HR management system.",
     "Compliance System":"Compliance management system.",
@@ -702,6 +717,7 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     "Belgium Customs Automation":"Belgium customs clearance — OCR for AXA/T1/EMR/IRP, auto entry into Logisoft/Descartes. In build.",
     "Gouts / Pointe Noire Entry":"Extracts Gouts documents and runs a 200-step flow to enter Pointe Noire cars.",
     "Mercedes OEM Bookings":"Turns Mercedes OEM bookings into Logisoft-ready data for paste-in.",
+    "Freight Department App":"Freight department app — Gouts / Pointe Noire entry and Mercedes OEM bookings, in one place.",
     "Bookings PDF Agent":"Claude extracts booking data from PDFs into a Logisoft-ready sheet.",
     "Paginated→CSV/SQL Flows":"Power Automate flows that persist report data to CSV and SQL for agents.",
     "AI Chat Agents":"Claude and Copilot chat over the data — answers, analysis and visuals.",
@@ -720,14 +736,15 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     "Market Monitoring Platform":"AI market-monitoring platform — to be registered as a business.",
     "Investment Portfolio Monitor":"AI investment-portfolio monitoring platform.",
     "AI Automation Agents":"Reusable AI automation agents being prototyped for future release.",
-    "Sallaum Executive App":"Executive app bringing the unit's key reports and insights into one place for leadership."
+    "Sallaum Executive App":"Executive app bringing the unit's key reports and insights into one place for leadership.",
+    "Azure Apps":"Custom apps hosted on Azure — the unit's internal app portal."
   };
   const groups={
     A:{label:"Data Analytics & Power BI",color:"#E2231A",projects:["Finance Module","Running Cost Report","Receivables Report","Sales Report","OEM Contract Report","Freight Module","Operations Report","Small & Ad-hoc Reports","SMC Module","Claims Report","Paginated Reports for AI","Foundation Report"],future:["Finance Module — More Controls","SMC Module — More Controls","Payables Module","Operations Report (MAC System)","Sustainability Report","Freight — More Controls","Nova Vault Report","Belgium Terminal Reports","Additional Companies Reports","Spot Sales → Sales CRM","Group Executive Cockpit","Claims Analytics","HR Analytics","Cash-flow & Treasury Forecast","Voyage & Vessel P&L"]},
-    B:{label:"Automations",color:"#0E8C6B",projects:["Belgium Customs Automation","Gouts / Pointe Noire Entry","Mercedes OEM Bookings","Paginated→CSV/SQL Flows","Finance Office Scripts / FRP"],future:["More Office Scripts","More Power Automate Pipelines","More Data-Entry Automations","Month-end Close Automation","AP Invoice 3-Way Match","Claims & HR Onboarding Workflows","Automated Report Distribution"]},
+    B:{label:"Automations",color:"#0E8C6B",projects:["Belgium Customs Automation","Paginated→CSV/SQL Flows","Finance Office Scripts / FRP"],subgroups:[{label:"Freight Department App",url:"https://polite-sky-039b05310.7.azurestaticapps.net/",projects:["Gouts / Pointe Noire Entry","Mercedes OEM Bookings"]}],future:["More Office Scripts","More Power Automate Pipelines","More Data-Entry Automations","Month-end Close Automation","AP Invoice 3-Way Match","Claims & HR Onboarding Workflows","Automated Report Distribution"]},
     C:{label:"Agents",color:"#E07B1A",projects:["Bookings PDF Agent","AI Chat Agents","Fuel Price Agent","Hesnes Report Agent","SMC Report Agent","Copilot Email Agents","Competitor Data Agent","Social Media Agent","Forecast Agent","Scheduling Agent"],future:["SMC Billing Anomaly Agent","Email Summary Agent (Fabric)","Cybersecurity Agent","Compliance Agent","Claims Data-Entry Agent","Company-wide AI Assistant","HR Agent","Finance Close & Reconciliation Agent","Multilingual Support Agent"]},
-    D:{label:"Research & Development",color:"#6D5BD0",projects:["Continuous Tech Watch","AI Automation Agents","Sallaum Executive App"],future:["Stowage Optimization","Document Intelligence Pipeline"]},
-    E:{label:"Tech Hold",color:"#2563EB",projects:["Personal Budgeting App","Corporate Finance App","Investment Portfolio Monitor","Market Monitoring Platform"],future:["Real Estate Platform","Claims CRM System","HR System","Compliance System","Unified Internal Portal (Fabric)","Sales CRM"]}
+    D:{label:"Research & Development",color:"#6D5BD0",projects:["Continuous Tech Watch","AI Automation Agents","Sallaum Executive App","Azure Apps"],future:["Stowage Optimization","Document Intelligence Pipeline"]},
+    E:{label:"Tech Hold",color:"#2563EB",projects:["Personal Budgeting App","Corporate Finance App","Investment Portfolio Monitor","Market Monitoring Platform","Real Estate App"],future:["Claims CRM System","HR System","Compliance System","Unified Internal Portal (Fabric)","Sales CRM"]}
   };
   function makeNet(cfg){
   const FUT=cfg.status==="future";
@@ -745,6 +762,15 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
       const n={id:k+":"+p,label:p,kind:"proj",color:g.color,r:FUT?7:7.5,group:k,status:cfg.status,phase:Math.random()*6.283,url:LINKS[p]||null,desc:DESC[p]||""};
       nodes.push(n); links.push([hub,n,FUT?90:72]);
     });
+    if(!FUT && g.subgroups){ g.subgroups.forEach(sg=>{
+      const sid=k+"::"+sg.label;
+      const sub={id:sid,label:sg.label,kind:"sub",color:g.color,r:13,group:k,status:"current",phase:Math.random()*6.283,url:sg.url||null,desc:DESC[sg.label]||""};
+      nodes.push(sub); links.push([hub,sub,96]);
+      sg.projects.forEach(p=>{
+        const n={id:k+":"+p,label:p,kind:"proj",color:g.color,r:7.5,group:k,status:"current",parent:sid,phase:Math.random()*6.283,url:sg.url||LINKS[p]||null,desc:DESC[p]||""};
+        nodes.push(n); links.push([sub,n,52]);
+      });
+    }); }
   });
   const HOT=new Set();
   if(cfg.status==="current"){ (typeof UPDATES!=="undefined"?UPDATES:[]).forEach(u=>{ if(u.nodes) u.nodes.forEach(id=>HOT.add(id)); }); }
@@ -759,7 +785,7 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     root.x=W/2; root.y=H/2;
     const hubs=nodes.filter(n=>n.kind==="hub");
     hubs.forEach((h,i)=>{const a=-Math.PI/2+i*2*Math.PI/hubs.length; h.x=W/2+Math.cos(a)*170; h.y=H/2+Math.sin(a)*150;});
-    nodes.filter(n=>n.kind==="proj").forEach((n,i)=>{const h=nodes.find(x=>x.id===n.group);
+    nodes.filter(n=>n.kind==="proj"||n.kind==="sub").forEach((n,i)=>{const h=nodes.find(x=>x.id===n.group);
       const a=Math.random()*Math.PI*2; n.x=h.x+Math.cos(a)*60; n.y=h.y+Math.sin(a)*60;});
     nodes.forEach(n=>{n.vx=0;n.vy=0;});
   }
@@ -846,13 +872,14 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     ctx.textAlign="center"; ctx.textBaseline="middle";
     nodes.forEach(n=>{
       if(!vis(n)) return;
+      if(n.kind==="sub") return;
       const show = flt ? true : (n.kind!=="proj" || n===hovered || (hl&&near&&near.has(n)));
       if(!show) return;
       const dim = hl && n!==hl && !(near&&near.has(n)); if(dim) return;
-      ctx.font = n.kind==="root"?"800 13px 'Segoe UI',sans-serif":(n.kind==="hub"?"700 12.5px 'Segoe UI',sans-serif":(flt?"600 12px 'Segoe UI',sans-serif":"600 11px 'Segoe UI',sans-serif"));
+      ctx.font = n.kind==="root"?"800 13px 'Segoe UI',sans-serif":((n.kind==="hub"||n.kind==="sub")?"700 12.5px 'Segoe UI',sans-serif":(flt?"600 12px 'Segoe UI',sans-serif":"600 11px 'Segoe UI',sans-serif"));
       const ly = n.y + n.r + (n.kind==="proj"?13:16);
       let t = n.label;
-      if(n.url && n.kind==="proj") t += "  ↗";
+      if(n.url && (n.kind==="proj"||n.kind==="sub")) t += "  ↗";
       const w=ctx.measureText(t).width;
       ctx.fillStyle="rgba(255,255,255,.92)";
       ctx.fillRect(n.x-w/2-5, ly-9, w+10, 18);
@@ -902,10 +929,18 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
   function layoutRadial(g){
     const hub=nodes.find(n=>n.id===g); if(!hub) return;
     hub.x=W/2; hub.y=H/2; hub.vx=hub.vy=0;
-    const ps=nodes.filter(n=>n.kind==="proj"&&n.group===g&&vis(n));
+    // top-level ring: direct projects (no parent) + sub-hubs
+    const tops=nodes.filter(n=>n.group===g&&vis(n)&&((n.kind==="proj"&&!n.parent)||n.kind==="sub"));
     const R=Math.min(W,H)*0.34;
-    ps.forEach((n,i)=>{const a=-Math.PI/2 + i*2*Math.PI/ps.length;
-      n.x=W/2+Math.cos(a)*R; n.y=H/2+Math.sin(a)*R; n.vx=n.vy=0;});
+    tops.forEach((n,i)=>{const a=-Math.PI/2 + i*2*Math.PI/tops.length;
+      n.x=W/2+Math.cos(a)*R; n.y=H/2+Math.sin(a)*R; n.vx=n.vy=0;
+      if(n.kind==="sub"){
+        const kids=nodes.filter(c=>c.parent===n.id&&vis(c));
+        const R2=R+Math.min(W,H)*0.16;
+        kids.forEach((c,j)=>{const a2=a+(j-(kids.length-1)/2)*0.34;
+          c.x=W/2+Math.cos(a2)*R2; c.y=H/2+Math.sin(a2)*R2; c.vx=c.vy=0;});
+      }
+    });
   }
   function setFilter(f){
     flt=(f==="all"?null:f); hovered=null;
