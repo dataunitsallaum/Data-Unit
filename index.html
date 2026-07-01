@@ -70,6 +70,28 @@
   .notif-item .ndate{font-size:10.5px;color:#9aa7b8;margin-top:5px;font-weight:600}
   .notif-empty{padding:26px 16px;text-align:center;color:var(--muted);font-size:13px}
 
+  /* ---- latest updates ---- */
+  .updates-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:22px}
+  .up-card{position:relative;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--uc,#647082);
+    border-radius:14px;padding:15px 18px;box-shadow:var(--shadow);cursor:pointer;transition:transform .15s,box-shadow .15s}
+  .up-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(16,42,77,.14)}
+  .up-card.fresh{animation:upCardGlow 2.6s ease-in-out infinite}
+  @keyframes upCardGlow{0%,100%{box-shadow:0 6px 18px rgba(16,42,77,.08),0 0 0 -3px var(--uc)}
+    50%{box-shadow:0 6px 20px rgba(16,42,77,.10),0 0 18px -3px var(--uc)}}
+  .up-top{display:flex;align-items:center;gap:9px;font-size:11.5px}
+  .up-dot{position:relative;width:9px;height:9px;border-radius:50%;background:var(--uc);flex:0 0 auto}
+  .up-dot::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--uc);animation:upPing 2.2s ease-out infinite}
+  @keyframes upPing{0%{transform:scale(1);opacity:.6}70%,100%{transform:scale(2.6);opacity:0}}
+  .up-tag{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:999px}
+  .up-tag.new{background:#e7f6f0;color:#0a6b4f}
+  .up-tag.mod{background:#fdeccd;color:#9a5b00}
+  .up-scope{font-weight:700;color:var(--uc)}
+  .up-date{margin-left:auto;color:#9aa7b8;font-weight:600}
+  .up-title{font-size:15px;font-weight:800;color:var(--ink);margin-top:11px;letter-spacing:-.01em}
+  .up-note{font-size:13px;color:var(--muted);margin-top:5px;line-height:1.5}
+  .up-open{color:var(--uc);font-weight:800;margin-left:7px;white-space:nowrap}
+  @media(max-width:560px){.updates-grid{grid-template-columns:1fr}}
+
   /* ---- hero ---- */
   .hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-d) 70%);color:#fff;position:relative;overflow:hidden}
   .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;
@@ -274,6 +296,7 @@
         <path class="a" d="M28 6 L52 6 L38 26 L14 26 Z"/><path class="a" d="M18 30 L42 30 L28 50 L4 50 Z"/></svg>
       Sallaum Enterprises</span>
     <span class="brand-sub">Data &amp; AI Unit</span></div>
+  <a class="lnk" href="#updates">Updates</a>
   <a class="lnk" href="#network">Neural Net</a>
   <a class="lnk" href="#delivery">Delivery</a>
   <a class="lnk" href="#roadmap">2026 Roadmap</a>
@@ -317,6 +340,14 @@
     <div class="kpi red"><div class="n">Days<small>→min</small></div><div class="l">Reporting turnaround</div></div>
   </div>
 </div>
+
+<!-- LATEST UPDATES -->
+<section id="updates"><div class="wrap">
+  <div class="eyebrow">What's new</div>
+  <h2 style="font-size:28px">Latest updates</h2>
+  <p class="lead">New projects and changes as they ship — the same items flagged in the 🔔 bell and glowing on the map below.</p>
+  <div class="updates-grid" id="updatesGrid"></div>
+</div></section>
 
 <!-- NEURAL NET -->
 <section id="network"><div class="wrap">
@@ -563,25 +594,27 @@
 <script>
 /* ============ UPDATES (notifications feed) ============
    Glow + notifications are scoped to CURRENT WORK only.
-   Add newest entries at the TOP. `nodes` (["<pillar>:<exact current-net label>", ...])
-   make the matching Current Work dots glow.
+   Add newest entries at the TOP. Keep the list to a MAX of 9 — when you add a new
+   one, delete the oldest at the bottom so it never exceeds 9.
+   `nodes` (["<pillar>:<exact current-net label>", ...]) make the matching Current
+   Work dots glow. `url` (optional) makes the update card + bell item open that link.
    Pillars: A=Analytics  B=Automations  C=Agents  D=R&D  E=Tech Hold. */
 const UPDATES=[
   {date:"2026-06-29",type:"new",net:"current",scope:"Tech Hold",title:"Real Estate App is live",
    note:"AI-integrated real estate platform — now linked from the Tech Hold pillar.",
-   color:"#2563EB",nodes:["E:Real Estate App"]},
+   color:"#2563EB",url:"https://salmon-beach-00b773a10.7.azurestaticapps.net/",nodes:["E:Real Estate App"]},
   {date:"2026-06-29",type:"new",net:"current",scope:"Automations",title:"Freight Department App is live",
    note:"Gouts / Pointe Noire entry and Mercedes OEM bookings grouped into one linked app.",
-   color:"#0E8C6B",nodes:["B::Freight Department App"]},
+   color:"#0E8C6B",url:"https://polite-sky-039b05310.7.azurestaticapps.net/",nodes:["B::Freight Department App"]},
   {date:"2026-06-29",type:"mod",net:"current",scope:"Agents",title:"SMC Report Agent linked",
    note:"The SMC Report Agent dot now opens its live app.",
-   color:"#E07B1A",nodes:["C:SMC Report Agent"]},
+   color:"#E07B1A",url:"https://witty-sea-070a6c710.7.azurestaticapps.net",nodes:["C:SMC Report Agent"]},
   {date:"2026-06-29",type:"new",net:"current",scope:"R&D",title:"Azure Apps added",
    note:"Azure-hosted internal app portal added to the R&D pillar.",
-   color:"#6D5BD0",nodes:["D:Azure Apps"]},
+   color:"#6D5BD0",url:"https://wonderful-field-065481810.7.azurestaticapps.net/",nodes:["D:Azure Apps"]},
   {date:"2026-06-29",type:"new",net:"current",scope:"R&D",title:"Sallaum Executive App is live",
    note:"Executive app bringing the unit's key reports and insights into one place for leadership — now linked from the map.",
-   color:"#6D5BD0",nodes:["D:Sallaum Executive App"]},
+   color:"#6D5BD0",url:"https://wonderful-field-065481810.7.azurestaticapps.net/",nodes:["D:Sallaum Executive App"]},
   {date:"2026-06-15",type:"new",net:"current",scope:"Agents",title:"Forecast & Scheduling agents in build",
    note:"Vessel forecasts and voyage scheduling from historical data, stock and OEM contracts.",
    color:"#E07B1A",nodes:["C:Forecast Agent","C:Scheduling Agent"]},
@@ -591,8 +624,8 @@ const UPDATES=[
   {date:"2026-06-10",type:"new",net:"current",scope:"Automations",title:"Finance Office Scripts / FRP",
    note:"Office Scripts for bookings, balances and budget mapping; FRP automation in build.",
    color:"#0E8C6B",nodes:["B:Finance Office Scripts / FRP"]},
-  {date:"2026-06-08",type:"new",net:"current",scope:"Agents",title:"Social Media Agent live",
-   note:"Generates daily on-brand content and schedules posts via Zapier and Buffer.",
+  {date:"2026-06-08",type:"mod",net:"current",scope:"Agents",title:"Social Media Agent — in testing",
+   note:"Generates daily on-brand content and schedules posts via Zapier and Buffer — currently under testing.",
    color:"#E07B1A",nodes:["C:Social Media Agent"]}
 ];
 
@@ -961,14 +994,35 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
         list=document.getElementById("notifList"),badge=document.getElementById("notifBadge"),
         clr=document.getElementById("notifClr");
   if(!btn||typeof UPDATES==="undefined") return;
-  list.innerHTML = UPDATES.map(u=>{
+  list.innerHTML = UPDATES.slice(0,9).map(u=>{
     const col=u.color||"#647082";
     const tag=u.type==="new"?'<span class="tag new">New</span>':'<span class="tag mod">Updated</span>';
-    return '<div class="notif-item"><span class="nd" style="background:'+col+'"></span>'+
-      '<div class="nb"><div class="nt">'+tag+'<span>'+u.title+'</span></div>'+
+    return '<div class="notif-item"'+(u.url?' data-url="'+u.url+'"':'')+'><span class="nd" style="background:'+col+'"></span>'+
+      '<div class="nb"><div class="nt">'+tag+'<span>'+u.title+(u.url?' ↗':'')+'</span></div>'+
       (u.note?'<div class="ns">'+u.note+'</div>':'')+
       '<div class="ndate">'+u.scope+' · '+u.date+'</div></div></div>';
   }).join("") || '<div class="notif-empty">No updates yet.</div>';
+
+  // ---- Latest updates section (same feed, max 9) ----
+  const grid=document.getElementById("updatesGrid");
+  if(grid){
+    grid.innerHTML = UPDATES.slice(0,9).map((u,idx)=>{
+      const col=u.color||"#647082";
+      const tag=u.type==="new"?'<span class="up-tag new">New</span>':'<span class="up-tag mod">Updated</span>';
+      const arrow=u.url?'<span class="up-open">↗</span>':'';
+      return '<div class="up-card'+(idx===0?' fresh':'')+'" style="--uc:'+col+'"'+(u.url?' data-url="'+u.url+'"':'')+'>'+
+        '<div class="up-top"><span class="up-dot"></span>'+tag+
+        '<span class="up-scope">'+u.scope+'</span><span class="up-date">'+u.date+'</span></div>'+
+        '<div class="up-title">'+u.title+arrow+'</div>'+
+        (u.note?'<div class="up-note">'+u.note+'</div>':'')+'</div>';
+    }).join("") || '<div class="notif-empty">No updates yet.</div>';
+    grid.querySelectorAll(".up-card").forEach(el=>el.addEventListener("click",()=>{
+      const url=el.getAttribute("data-url");
+      if(url){window.open(url,"_blank","noopener");}
+      else{const t=document.getElementById("network"); if(t) t.scrollIntoView({behavior:"smooth"});}
+    }));
+  }
+
   let seen=0; try{seen=parseInt(localStorage.getItem("sallaum_seen")||"0",10)||0;}catch(e){}
   function refreshBadge(){const u=Math.max(0,UPDATES.length-seen);
     if(u>0){badge.textContent=u>9?"9+":u;badge.classList.remove("hide");}else badge.classList.add("hide");}
@@ -980,6 +1034,8 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
   clr.addEventListener("click",e=>{e.stopPropagation();markRead();});
   list.querySelectorAll(".notif-item").forEach(el=>el.addEventListener("click",()=>{
     close();
+    const url=el.getAttribute("data-url");
+    if(url){window.open(url,"_blank","noopener");return;}
     if(location.hash==="#aimodel"){location.hash="#network";}
     else{const t=document.getElementById("network");if(t)t.scrollIntoView({behavior:"smooth"});}
   }));
