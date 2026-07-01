@@ -2,9 +2,40 @@
 
 Hosts the single-file dashboard (`index.html`) on **Azure Static Web Apps (Free plan)**, **auto-deployed from GitHub**.
 
-**Cost: $0/month.** No build step, no Functions, no database, no auth — it's a static, read-only page.
+**Cost: $0/month.** No build step, no Functions, no database. Static, read-only page.
 
-**Access: public.** Anyone with the link can view the dashboard. It contains no secrets; the live Power BI reports it links to still require their own Microsoft login. (If you later want the whole site gated to Sallaum accounts, that needs the SWA Standard plan, ~$9/mo — ask and I'll add it.)
+## Authentication — Microsoft sign-in required
+
+The whole site is gated behind **Microsoft sign-in** using Azure Static Web Apps' built-in auth
+(configured in `staticwebapp.config.json`). Anonymous visitors are redirected to a Microsoft login
+before they can see anything. GitHub login is disabled; `/logout` signs the user out.
+
+- `"/*": allowedRoles: ["authenticated"]` — every route requires a signed-in user.
+- `401 → /.auth/login/aad` — unauthenticated requests bounce to the Microsoft (Entra) login.
+- Works on the **Free plan**, no portal setup needed — the pre-configured Microsoft provider is used.
+
+### ⚠️ Current limitation: any Microsoft account can sign in
+The Free plan's pre-configured provider accepts **any** Microsoft/Entra account (any org, even
+personal). It stops anonymous public access, but does not yet restrict to the Sallaum tenant.
+
+### To restrict to Sallaum-tenant accounts only (recommended) — needs the Standard plan (~$9/mo)
+1. Azure Portal → the Static Web App → **Plan** → switch to **Standard**.
+2. **Microsoft Entra ID → App registrations → New registration**: name `Sallaum Data & AI Dashboard`,
+   **Single tenant**, Web redirect URI `https://<host>/.auth/login/aad/callback`. Copy the
+   **Application (client) ID**; create a **client secret**. Tenant is `0f0000f9-39cb-49a3-a562-ebe7dca0a3be`.
+3. Static Web App → **Settings → Environment variables**: add
+   `AAD_CLIENT_ID` = client ID, `AAD_CLIENT_SECRET` = secret.
+4. Replace the config's routes/overrides with a **custom** provider block (I can generate this for you):
+   ```json
+   "auth": { "identityProviders": { "azureActiveDirectory": {
+     "registration": {
+       "openIdIssuer": "https://login.microsoftonline.com/0f0000f9-39cb-49a3-a562-ebe7dca0a3be/v2.0",
+       "clientIdSettingName": "AAD_CLIENT_ID",
+       "clientSecretSettingName": "AAD_CLIENT_SECRET"
+     } } } }
+   ```
+   Now only Sallaum-tenant accounts can sign in. Tell me when the Standard plan + Entra app are ready
+   and I'll wire up the config + push.
 
 ---
 
