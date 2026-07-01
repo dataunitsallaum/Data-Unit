@@ -292,7 +292,6 @@
   .ag-err{margin-top:16px;font-size:13px;color:#ffb4ae;line-height:1.5}
   .ag-btn{display:inline-block;margin-top:14px;background:#fff;color:var(--navy);font-weight:700;padding:8px 16px;border-radius:8px;text-decoration:none;cursor:pointer;border:none;font-size:13px}
 </style>
-<script src="https://alcdn.msauth.net/browser/2.38.4/js/msal-browser.min.js"></script>
 </head>
 <body>
 
@@ -316,19 +315,33 @@
   // Enforce sign-in only on the deployed Azure host; skip for local/preview so the file stays openable.
   var enforce=/azurestaticapps\.net$/i.test(location.hostname);
   if(!enforce){ reveal(); return; }
-  if(typeof msal==="undefined"){ fail("Could not load the Microsoft sign-in library."); return; }
-  var pca=new msal.PublicClientApplication({
-    auth:{ clientId:"123e4020-6dce-489e-93a0-01a760276e81",
-      authority:"https://login.microsoftonline.com/0f0000f9-39cb-49a3-a562-ebe7dca0a3be",
-      redirectUri:window.location.origin },
-    cache:{ cacheLocation:"sessionStorage" }
+  function loadMsal(cb){
+    if(typeof msal!=="undefined"){ cb(true); return; }
+    var srcs=["https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js",
+              "https://cdn.jsdelivr.net/npm/@azure/msal-browser@2.38.1/lib/msal-browser.min.js"];
+    var i=0;
+    (function next(){
+      if(typeof msal!=="undefined"){ cb(true); return; }
+      if(i>=srcs.length){ cb(false); return; }
+      var s=document.createElement("script"); s.src=srcs[i++]; s.async=false;
+      s.onload=function(){ cb(true); }; s.onerror=next; document.head.appendChild(s);
+    })();
+  }
+  loadMsal(function(ok){
+    if(!ok||typeof msal==="undefined"){ fail("Could not load the Microsoft sign-in library."); return; }
+    var pca=new msal.PublicClientApplication({
+      auth:{ clientId:"123e4020-6dce-489e-93a0-01a760276e81",
+        authority:"https://login.microsoftonline.com/0f0000f9-39cb-49a3-a562-ebe7dca0a3be",
+        redirectUri:window.location.origin },
+      cache:{ cacheLocation:"sessionStorage" }
+    });
+    window.__signOut=function(){ try{ pca.logoutRedirect({ account:pca.getAllAccounts()[0], postLogoutRedirectUri:window.location.origin }); }catch(e){} };
+    pca.handleRedirectPromise().then(function(res){
+      var acct=(res&&res.account)?res.account:(pca.getAllAccounts()[0]||null);
+      if(acct){ pca.setActiveAccount(acct); reveal(); }
+      else { pca.loginRedirect({ scopes:["openid","profile"] }); }
+    }).catch(function(err){ fail("Sign-in failed. "+((err&&err.errorMessage)||"Please try again.")); });
   });
-  window.__signOut=function(){ try{ pca.logoutRedirect({ account:pca.getAllAccounts()[0], postLogoutRedirectUri:window.location.origin }); }catch(e){} };
-  pca.handleRedirectPromise().then(function(res){
-    var acct=(res&&res.account)?res.account:(pca.getAllAccounts()[0]||null);
-    if(acct){ pca.setActiveAccount(acct); reveal(); }
-    else { pca.loginRedirect({ scopes:["openid","profile"] }); }
-  }).catch(function(err){ fail("Sign-in failed. "+((err&&err.errorMessage)||"Please try again.")); });
 })();
 </script>
 
