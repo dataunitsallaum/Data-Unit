@@ -11,11 +11,19 @@ full-screen "Signing you in…" gate appears; MSAL redirects to the Microsoft lo
 in tenant `0f0000f9-39cb-49a3-a562-ebe7dca0a3be` can get in. The footer "Sign out" link logs out.
 
 - **Entra app:** `PowerBI Refresh` — client ID `123e4020-6dce-489e-93a0-01a760276e81`
-  (shared SPA app; the SWA URL is registered as a **Single-page application** redirect URI).
+  (shared SPA app; each deployed origin is registered as a **Single-page application** redirect URI).
 - **Authority:** `https://login.microsoftonline.com/0f0000f9-39cb-49a3-a562-ebe7dca0a3be` (tenant-locked).
 - **Cost: $0** — no Standard plan, no client secret (SPA + PKCE).
-- Auth is **only enforced on the `*.azurestaticapps.net` host** — opening `index.html` locally skips
-  it so the file stays editable/previewable.
+- **MSAL library is bundled into `index.html`** (self-hosted, no CDN dependency) — the file is fully
+  self-contained, so a manual upload to any host works with nothing else attached.
+- Auth is **enforced on every real host** (Azure, Netlify, custom domains); only `localhost`/`file://`
+  skip it, so the file stays editable/previewable locally.
+
+### Registered origins (each deployed host needs its exact origin as an SPA redirect URI)
+| Host | Redirect URI to register (no trailing slash) |
+|---|---|
+| Azure | `https://nice-sea-0604a7a10.7.azurestaticapps.net` |
+| Netlify | `https://data-ai-unit.netlify.app` |
 
 > **Security note (soft gate):** because the page is a static file, the HTML is still downloadable
 > directly (it contains no secrets — the linked Power BI reports and apps each require their own login).
