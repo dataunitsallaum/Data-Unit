@@ -312,8 +312,9 @@
   function fail(msg){ var s=document.getElementById("agSpin"); if(s) s.style.display="none";
     var e=document.getElementById("agErr"); if(e) e.innerHTML=msg+'<br><button class="ag-btn" onclick="location.reload()">Try again</button>'; }
   window.__signOut=function(){};
-  // Enforce sign-in only on the deployed Azure host; skip for local/preview so the file stays openable.
-  var enforce=/azurestaticapps\.net$/i.test(location.hostname);
+  // Enforce sign-in on any real deployed host (Azure, Netlify, custom domains); skip only for local file/preview.
+  var h=location.hostname;
+  var enforce=!(h==="localhost"||h==="127.0.0.1"||h==="0.0.0.0"||h===""||location.protocol==="file:");
   if(!enforce){ reveal(); return; }
   function loadMsal(cb){
     if(typeof msal!=="undefined"){ cb(true); return; }
