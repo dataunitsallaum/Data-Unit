@@ -282,9 +282,55 @@
   footer b{color:#fff}
   .aim-back{color:#cdd8ea;font-weight:700;text-decoration:underline;cursor:pointer}
   .aim-back:hover{color:#fff}
+  #authGate{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,var(--navy),var(--navy-d));display:flex;align-items:center;justify-content:center;color:#fff}
+  #authGate.hide{display:none}
+  .ag-box{text-align:center;max-width:360px;padding:24px}
+  .ag-title{font-size:20px;font-weight:800;margin-top:14px;color:#fff}
+  .ag-sub{font-size:13px;color:#cdd8ea;margin-top:6px}
+  .ag-spin{width:34px;height:34px;border:3px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;margin:22px auto 0;animation:agSpin .9s linear infinite}
+  @keyframes agSpin{to{transform:rotate(360deg)}}
+  .ag-err{margin-top:16px;font-size:13px;color:#ffb4ae;line-height:1.5}
+  .ag-btn{display:inline-block;margin-top:14px;background:#fff;color:var(--navy);font-weight:700;padding:8px 16px;border-radius:8px;text-decoration:none;cursor:pointer;border:none;font-size:13px}
 </style>
+<script src="https://alcdn.msauth.net/browser/2.38.4/js/msal-browser.min.js"></script>
 </head>
 <body>
+
+<!-- AUTH GATE (Microsoft sign-in, Sallaum tenant) -->
+<div id="authGate">
+  <div class="ag-box">
+    <svg width="46" height="40" viewBox="0 0 56 56" aria-hidden="true"><path fill="#E2231A" d="M28 6 L52 6 L38 26 L14 26 Z"/><path fill="#E2231A" d="M18 30 L42 30 L28 50 L4 50 Z"/></svg>
+    <div class="ag-title">Signing you in…</div>
+    <div class="ag-sub">Sallaum Enterprises · Data &amp; AI Unit</div>
+    <div class="ag-spin" id="agSpin"></div>
+    <div class="ag-err" id="agErr"></div>
+  </div>
+</div>
+<script>
+(function(){
+  var gate=document.getElementById("authGate");
+  function reveal(){ if(gate) gate.classList.add("hide"); }
+  function fail(msg){ var s=document.getElementById("agSpin"); if(s) s.style.display="none";
+    var e=document.getElementById("agErr"); if(e) e.innerHTML=msg+'<br><button class="ag-btn" onclick="location.reload()">Try again</button>'; }
+  window.__signOut=function(){};
+  // Enforce sign-in only on the deployed Azure host; skip for local/preview so the file stays openable.
+  var enforce=/azurestaticapps\.net$/i.test(location.hostname);
+  if(!enforce){ reveal(); return; }
+  if(typeof msal==="undefined"){ fail("Could not load the Microsoft sign-in library."); return; }
+  var pca=new msal.PublicClientApplication({
+    auth:{ clientId:"123e4020-6dce-489e-93a0-01a760276e81",
+      authority:"https://login.microsoftonline.com/0f0000f9-39cb-49a3-a562-ebe7dca0a3be",
+      redirectUri:window.location.origin },
+    cache:{ cacheLocation:"sessionStorage" }
+  });
+  window.__signOut=function(){ try{ pca.logoutRedirect({ account:pca.getAllAccounts()[0], postLogoutRedirectUri:window.location.origin }); }catch(e){} };
+  pca.handleRedirectPromise().then(function(res){
+    var acct=(res&&res.account)?res.account:(pca.getAllAccounts()[0]||null);
+    if(acct){ pca.setActiveAccount(acct); reveal(); }
+    else { pca.loginRedirect({ scopes:["openid","profile"] }); }
+  }).catch(function(err){ fail("Sign-in failed. "+((err&&err.errorMessage)||"Please try again.")); });
+})();
+</script>
 
 <!-- NAV -->
 <nav class="bar"><div class="wrap">
@@ -588,7 +634,7 @@
 
 <footer><div class="wrap">
   <div>Sallaum Enterprises · <b>Data &amp; AI Unit</b> — Work tracking dashboard</div>
-  <div>Prepared by <b>Wael Frashy</b> · Generated June 2026 · <a href="/logout" style="color:#fff;text-decoration:underline">Sign out</a></div>
+  <div>Prepared by <b>Wael Frashy</b> · Generated June 2026 · <a href="#" onclick="__signOut();return false;" style="color:#fff;text-decoration:underline">Sign out</a></div>
 </div></footer>
 
 <script>

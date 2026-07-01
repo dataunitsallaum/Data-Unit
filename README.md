@@ -4,38 +4,28 @@ Hosts the single-file dashboard (`index.html`) on **Azure Static Web Apps (Free 
 
 **Cost: $0/month.** No build step, no Functions, no database. Static, read-only page.
 
-## Authentication — Microsoft sign-in required
+## Authentication — Microsoft sign-in (Sallaum tenant), client-side MSAL
 
-The whole site is gated behind **Microsoft sign-in** using Azure Static Web Apps' built-in auth
-(configured in `staticwebapp.config.json`). Anonymous visitors are redirected to a Microsoft login
-before they can see anything. GitHub login is disabled; `/logout` signs the user out.
+Sign-in is enforced **in the page** with MSAL.js, restricted to the **Sallaum tenant**. On load, a
+full-screen "Signing you in…" gate appears; MSAL redirects to the Microsoft login and only accounts
+in tenant `0f0000f9-39cb-49a3-a562-ebe7dca0a3be` can get in. The footer "Sign out" link logs out.
 
-- `"/*": allowedRoles: ["authenticated"]` — every route requires a signed-in user.
-- `401 → /.auth/login/aad` — unauthenticated requests bounce to the Microsoft (Entra) login.
-- Works on the **Free plan**, no portal setup needed — the pre-configured Microsoft provider is used.
+- **Entra app:** `PowerBI Refresh` — client ID `123e4020-6dce-489e-93a0-01a760276e81`
+  (shared SPA app; the SWA URL is registered as a **Single-page application** redirect URI).
+- **Authority:** `https://login.microsoftonline.com/0f0000f9-39cb-49a3-a562-ebe7dca0a3be` (tenant-locked).
+- **Cost: $0** — no Standard plan, no client secret (SPA + PKCE).
+- Auth is **only enforced on the `*.azurestaticapps.net` host** — opening `index.html` locally skips
+  it so the file stays editable/previewable.
 
-### ⚠️ Current limitation: any Microsoft account can sign in
-The Free plan's pre-configured provider accepts **any** Microsoft/Entra account (any org, even
-personal). It stops anonymous public access, but does not yet restrict to the Sallaum tenant.
+> **Security note (soft gate):** because the page is a static file, the HTML is still downloadable
+> directly (it contains no secrets — the linked Power BI reports and apps each require their own login).
+> MSAL controls *who sees the rendered page*, restricted to Sallaum accounts. For an **edge-level** gate
+> (the file itself not served until login) you'd move to the SWA **Standard plan (~$9/mo)** with built-in
+> auth + a custom single-tenant Entra registration — ask and I'll wire it up.
 
-### To restrict to Sallaum-tenant accounts only (recommended) — needs the Standard plan (~$9/mo)
-1. Azure Portal → the Static Web App → **Plan** → switch to **Standard**.
-2. **Microsoft Entra ID → App registrations → New registration**: name `Sallaum Data & AI Dashboard`,
-   **Single tenant**, Web redirect URI `https://<host>/.auth/login/aad/callback`. Copy the
-   **Application (client) ID**; create a **client secret**. Tenant is `0f0000f9-39cb-49a3-a562-ebe7dca0a3be`.
-3. Static Web App → **Settings → Environment variables**: add
-   `AAD_CLIENT_ID` = client ID, `AAD_CLIENT_SECRET` = secret.
-4. Replace the config's routes/overrides with a **custom** provider block (I can generate this for you):
-   ```json
-   "auth": { "identityProviders": { "azureActiveDirectory": {
-     "registration": {
-       "openIdIssuer": "https://login.microsoftonline.com/0f0000f9-39cb-49a3-a562-ebe7dca0a3be/v2.0",
-       "clientIdSettingName": "AAD_CLIENT_ID",
-       "clientSecretSettingName": "AAD_CLIENT_SECRET"
-     } } } }
-   ```
-   Now only Sallaum-tenant accounts can sign in. Tell me when the Standard plan + Entra app are ready
-   and I'll wire up the config + push.
+### If you add a custom domain later
+Register the new origin (e.g. `https://dataunit.sallaum.com`) as a **Single-page application** redirect
+URI on the `PowerBI Refresh` app, so MSAL keeps working there too.
 
 ---
 
