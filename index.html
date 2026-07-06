@@ -1069,7 +1069,7 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
   loop();
 
   function pos(e){const r=cv.getBoundingClientRect();const t=e.touches?e.touches[0]:e;return{x:t.clientX-r.left,y:t.clientY-r.top};}
-  function pick(p){let best=null,bd=1e9;nodes.forEach(n=>{const d=Math.hypot(n.x-p.x,n.y-p.y);if(d<n.r+7&&d<bd){bd=d;best=n;}});return best;}
+  function pick(p){let best=null,bd=1e9;nodes.forEach(n=>{if(!vis(n))return;const d=Math.hypot(n.x-p.x,n.y-p.y);if(d<n.r+7&&d<bd){bd=d;best=n;}});return best;}
   function openNode(n){if(n&&n.url){window.open(n.url,"_blank","noopener");return true;}return false;}
   const tip=document.getElementById(cfg.tip);
   function showTip(n){
