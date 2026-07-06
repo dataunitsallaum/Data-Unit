@@ -733,6 +733,9 @@ var st,ct,ut,lt,dt,ht,pt,gt,ft,mt=function(){function t(e,t,r){this.networkInter
    Work dots glow. `url` (optional) makes the update card + bell item open that link.
    Pillars: A=Analytics  B=Automations  C=Agents  D=R&D  E=Tech Hold. */
 const UPDATES=[
+  {date:"2026-07-06",type:"new",net:"current",scope:"R&D",title:"Data Unit App added",
+   note:"The Data & AI Unit's central app.",
+   color:"#6D5BD0",nodes:["D:Data Unit App"]},
   {date:"2026-07-06",type:"new",net:"current",scope:"R&D",title:"Finance Department App is live",
    note:"A suite of finance agents — receivables aging, billable items, Lomé bookings, item-loaded analysis and FRP benchmarking.",
    color:"#6D5BD0",url:"https://lemon-pebble-02b823510.7.azurestaticapps.net/",nodes:["D:Finance Department App"]},
@@ -748,9 +751,6 @@ const UPDATES=[
   {date:"2026-06-29",type:"mod",net:"current",scope:"Agents",title:"SMC Report Agent linked",
    note:"The SMC Report Agent dot now opens its live app.",
    color:"#E07B1A",url:"https://witty-sea-070a6c710.7.azurestaticapps.net",nodes:["C:SMC Report Agent"]},
-  {date:"2026-06-29",type:"new",net:"current",scope:"R&D",title:"Azure Apps added",
-   note:"Azure-hosted internal app portal added to the R&D pillar.",
-   color:"#6D5BD0",url:"https://wonderful-field-065481810.7.azurestaticapps.net/",nodes:["D:Azure Apps"]},
   {date:"2026-06-29",type:"new",net:"current",scope:"R&D",title:"Sallaum Executive App is live",
    note:"Executive app bringing the unit's key reports and insights into one place for leadership — now linked from the map.",
    color:"#6D5BD0",url:"https://wonderful-field-065481810.7.azurestaticapps.net/",nodes:["D:Sallaum Executive App"]},
@@ -821,7 +821,6 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     "Sallaum Executive App":"https://wonderful-field-065481810.7.azurestaticapps.net/",
     "Real Estate App":"https://salmon-beach-00b773a10.7.azurestaticapps.net/",
     "SMC Report Agent":"https://witty-sea-070a6c710.7.azurestaticapps.net",
-    "Azure Apps":"https://wonderful-field-065481810.7.azurestaticapps.net/",
     "Claims Management System":"https://salmon-dune-0cf658810.7.azurestaticapps.net/",
     "Freight Department App":"https://polite-sky-039b05310.7.azurestaticapps.net/",
     "Finance Department App":"https://lemon-pebble-02b823510.7.azurestaticapps.net/"
@@ -904,9 +903,8 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     "Corporate Finance App":"AI corporate finance and budgeting app for the CFO and CEO.",
     "Market Monitoring Platform":"AI market-monitoring platform — to be registered as a business.",
     "Investment Portfolio Monitor":"AI investment-portfolio monitoring platform.",
-    "AI Automation Agents":"Reusable AI automation agents being prototyped for future release.",
     "Sallaum Executive App":"Executive app bringing the unit's key reports and insights into one place for leadership.",
-    "Azure Apps":"Custom apps hosted on Azure — the unit's internal app portal.",
+    "Data Unit App":"The Data & AI Unit's central app.",
     "Claims Management System":"Automates extracting information from claim emails, processing them, and searching for additional data to take action.",
     "Finance Department App":"A suite of finance agents — receivables aging, billable items, Lomé bookings, item-loaded analysis and FRP benchmarking."
   };
@@ -914,7 +912,7 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     A:{label:"Data Analytics & Power BI",color:"#E2231A",projects:["Finance Module","Running Cost Report","Receivables Report","Sales Report","OEM Contract Report","Freight Module","Operations Report","Small & Ad-hoc Reports","SMC Module","Claims Report","Paginated Reports for AI","Foundation Report"],future:["Finance Module — More Controls","SMC Module — More Controls","Payables Module","Operations Report (MAC System)","Sustainability Report","Freight — More Controls","Nova Vault Report","Belgium Terminal Reports","Additional Companies Reports","Spot Sales → Sales CRM","Group Executive Cockpit","Claims Analytics","HR Analytics","Cash-flow & Treasury Forecast","Voyage & Vessel P&L"]},
     B:{label:"Automations",color:"#0E8C6B",projects:["Belgium Customs Automation","Gouts / Pointe Noire Entry","Mercedes OEM Bookings","Paginated→CSV/SQL Flows","Finance Office Scripts / FRP"],future:["More Office Scripts","More Power Automate Pipelines","More Data-Entry Automations","Month-end Close Automation","AP Invoice 3-Way Match","Claims & HR Onboarding Workflows","Automated Report Distribution"]},
     C:{label:"Agents",color:"#E07B1A",projects:["Bookings PDF Agent","AI Chat Agents","Fuel Price Agent","Hesnes Report Agent","SMC Report Agent","Copilot Email Agents","Competitor Data Agent","Social Media Agent","Forecast Agent","Scheduling Agent"],future:["SMC Billing Anomaly Agent","Email Summary Agent (Fabric)","Cybersecurity Agent","Compliance Agent","Claims Data-Entry Agent","Company-wide AI Assistant","HR Agent","Finance Close & Reconciliation Agent","Multilingual Support Agent"]},
-    D:{label:"Research & Development",color:"#6D5BD0",projects:["Continuous Tech Watch","AI Automation Agents","Sallaum Executive App","Azure Apps","Claims Management System","Freight Department App","Finance Department App"],future:["Stowage Optimization","Document Intelligence Pipeline"]},
+    D:{label:"Research & Development",color:"#6D5BD0",projects:["Continuous Tech Watch","Sallaum Executive App","Claims Management System","Freight Department App","Finance Department App","Data Unit App"],future:["Stowage Optimization","Document Intelligence Pipeline"]},
     E:{label:"Tech Hold",color:"#2563EB",projects:["Personal Budgeting App","Corporate Finance App","Investment Portfolio Monitor","Market Monitoring Platform","Real Estate App"],future:["Claims CRM System","HR System","Compliance System","Unified Internal Portal (Fabric)","Sales CRM"]}
   };
   function makeNet(cfg){
