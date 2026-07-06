@@ -748,9 +748,9 @@ const UPDATES=[
   {date:"2026-06-29",type:"new",net:"current",scope:"R&D",title:"Freight Department App is live",
    note:"Freight department app for Gouts / Pointe Noire entry and Mercedes OEM bookings.",
    color:"#6D5BD0",url:"https://polite-sky-039b05310.7.azurestaticapps.net/",nodes:["D:Freight Department App"]},
-  {date:"2026-06-29",type:"mod",net:"current",scope:"Agents",title:"SMC Report Agent linked",
-   note:"The SMC Report Agent dot now opens its live app.",
-   color:"#E07B1A",url:"https://witty-sea-070a6c710.7.azurestaticapps.net",nodes:["C:SMC Report Agent"]},
+  {date:"2026-06-29",type:"new",net:"current",scope:"R&D",title:"SMC App is live",
+   note:"SMC reporting app — full SMC report plus a summarized daily report.",
+   color:"#6D5BD0",url:"https://witty-sea-070a6c710.7.azurestaticapps.net",nodes:["D:SMC App"]},
   {date:"2026-06-29",type:"new",net:"current",scope:"R&D",title:"Sallaum Executive App is live",
    note:"Executive app bringing the unit's key reports and insights into one place for leadership — now linked from the map.",
    color:"#6D5BD0",url:"https://wonderful-field-065481810.7.azurestaticapps.net/",nodes:["D:Sallaum Executive App"]},
@@ -820,7 +820,7 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     "Personal Budgeting App":"https://wealthpathpersonal.netlify.app/",
     "Sallaum Executive App":"https://wonderful-field-065481810.7.azurestaticapps.net/",
     "Real Estate App":"https://salmon-beach-00b773a10.7.azurestaticapps.net/",
-    "SMC Report Agent":"https://witty-sea-070a6c710.7.azurestaticapps.net",
+    "SMC App":"https://witty-sea-070a6c710.7.azurestaticapps.net",
     "Claims Management System":"https://salmon-dune-0cf658810.7.azurestaticapps.net/",
     "Freight Department App":"https://polite-sky-039b05310.7.azurestaticapps.net/",
     "Finance Department App":"https://lemon-pebble-02b823510.7.azurestaticapps.net/"
@@ -891,7 +891,7 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     "AI Chat Agents":"Claude and Copilot chat over the data — answers, analysis and visuals.",
     "Fuel Price Agent":"Scrapes fuel prices daily into a OneDrive sheet shared with the CEO.",
     "Hesnes Report Agent":"Pulls the Hesnes PDF, researches the web and emails a tailored report.",
-    "SMC Report Agent":"Builds the full SMC report plus a summarized daily report.",
+    "SMC App":"Builds the full SMC report plus a summarized daily report.",
     "Copilot Email Agents":"Copilot agents that analyse data and email reports to management.",
     "Competitor Data Agent":"Mines public competitor releases for the figures the finance report needs.",
     "Finance Office Scripts / FRP":"Office Scripts for bookings, balances and budget mapping; FRP automation in build.",
@@ -911,8 +911,8 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
   const groups={
     A:{label:"Data Analytics & Power BI",color:"#E2231A",projects:["Finance Module","Running Cost Report","Receivables Report","Sales Report","OEM Contract Report","Freight Module","Operations Report","Small & Ad-hoc Reports","SMC Module","Claims Report","Paginated Reports for AI","Foundation Report"],future:["Finance Module — More Controls","SMC Module — More Controls","Payables Module","Operations Report (MAC System)","Sustainability Report","Freight — More Controls","Nova Vault Report","Belgium Terminal Reports","Additional Companies Reports","Spot Sales → Sales CRM","Group Executive Cockpit","Claims Analytics","HR Analytics","Cash-flow & Treasury Forecast","Voyage & Vessel P&L"]},
     B:{label:"Automations",color:"#0E8C6B",projects:["Belgium Customs Automation","Gouts / Pointe Noire Entry","Mercedes OEM Bookings","Paginated→CSV/SQL Flows","Finance Office Scripts / FRP"],future:["More Office Scripts","More Power Automate Pipelines","More Data-Entry Automations","Month-end Close Automation","AP Invoice 3-Way Match","Claims & HR Onboarding Workflows","Automated Report Distribution"]},
-    C:{label:"Agents",color:"#E07B1A",projects:["Bookings PDF Agent","AI Chat Agents","Fuel Price Agent","Hesnes Report Agent","SMC Report Agent","Copilot Email Agents","Competitor Data Agent","Social Media Agent","Forecast Agent","Scheduling Agent"],future:["SMC Billing Anomaly Agent","Email Summary Agent (Fabric)","Cybersecurity Agent","Compliance Agent","Claims Data-Entry Agent","Company-wide AI Assistant","HR Agent","Finance Close & Reconciliation Agent","Multilingual Support Agent"]},
-    D:{label:"Research & Development",color:"#6D5BD0",projects:["Continuous Tech Watch","Sallaum Executive App","Claims Management System","Freight Department App","Finance Department App","Data Unit App"],future:["Stowage Optimization","Document Intelligence Pipeline"]},
+    C:{label:"Agents",color:"#E07B1A",projects:["Bookings PDF Agent","AI Chat Agents","Fuel Price Agent","Hesnes Report Agent","Copilot Email Agents","Competitor Data Agent","Social Media Agent","Forecast Agent","Scheduling Agent"],future:["SMC Billing Anomaly Agent","Email Summary Agent (Fabric)","Cybersecurity Agent","Compliance Agent","Claims Data-Entry Agent","Company-wide AI Assistant","HR Agent","Finance Close & Reconciliation Agent","Multilingual Support Agent"]},
+    D:{label:"Research & Development",color:"#6D5BD0",projects:["Continuous Tech Watch","Sallaum Executive App","Claims Management System","Freight Department App","Finance Department App","Data Unit App","SMC App"],future:["Stowage Optimization","Document Intelligence Pipeline"]},
     E:{label:"Tech Hold",color:"#2563EB",projects:["Personal Budgeting App","Corporate Finance App","Investment Portfolio Monitor","Market Monitoring Platform","Real Estate App"],future:["Claims CRM System","HR System","Compliance System","Unified Internal Portal (Fabric)","Sales CRM"]}
   };
   function makeNet(cfg){
