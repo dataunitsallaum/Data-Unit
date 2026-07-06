@@ -733,6 +733,12 @@ var st,ct,ut,lt,dt,ht,pt,gt,ft,mt=function(){function t(e,t,r){this.networkInter
    Work dots glow. `url` (optional) makes the update card + bell item open that link.
    Pillars: A=Analytics  B=Automations  C=Agents  D=R&D  E=Tech Hold. */
 const UPDATES=[
+  {date:"2026-06-29",type:"new",net:"current",scope:"R&D",title:"Finance Department Agent added",
+   note:"A suite of finance agents — receivables aging, billable items, Lomé bookings, item-loaded analysis and FRP benchmarking.",
+   color:"#6D5BD0",nodes:["D::Finance Department Agent"]},
+  {date:"2026-06-29",type:"new",net:"current",scope:"R&D",title:"Claims Management System is live",
+   note:"Automates extracting information from claim emails, processing them, and searching for additional data to take action.",
+   color:"#6D5BD0",url:"https://salmon-dune-0cf658810.7.azurestaticapps.net/",nodes:["D:Claims Management System"]},
   {date:"2026-06-29",type:"new",net:"current",scope:"Tech Hold",title:"Real Estate App is live",
    note:"AI-integrated real estate platform — now linked from the Tech Hold pillar.",
    color:"#2563EB",url:"https://salmon-beach-00b773a10.7.azurestaticapps.net/",nodes:["E:Real Estate App"]},
@@ -753,13 +759,7 @@ const UPDATES=[
    color:"#E07B1A",nodes:["C:Forecast Agent","C:Scheduling Agent"]},
   {date:"2026-06-12",type:"mod",net:"current",scope:"Automations",title:"Belgium customs automation progressing",
    note:"OCR for AXA/T1/EMR/IRP with automatic entry into Logisoft/Descartes — in build.",
-   color:"#0E8C6B",nodes:["B:Belgium Customs Automation"]},
-  {date:"2026-06-10",type:"new",net:"current",scope:"Automations",title:"Finance Office Scripts / FRP",
-   note:"Office Scripts for bookings, balances and budget mapping; FRP automation in build.",
-   color:"#0E8C6B",nodes:["B:Finance Office Scripts / FRP"]},
-  {date:"2026-06-08",type:"mod",net:"current",scope:"Agents",title:"Social Media Agent — in testing",
-   note:"Generates daily on-brand content and schedules posts via Zapier and Buffer — currently under testing.",
-   color:"#E07B1A",nodes:["C:Social Media Agent"]}
+   color:"#0E8C6B",nodes:["B:Belgium Customs Automation"]}
 ];
 
 /* ============ DATA ============ */
@@ -821,7 +821,8 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     "Sallaum Executive App":"https://wonderful-field-065481810.7.azurestaticapps.net/",
     "Real Estate App":"https://salmon-beach-00b773a10.7.azurestaticapps.net/",
     "SMC Report Agent":"https://witty-sea-070a6c710.7.azurestaticapps.net",
-    "Azure Apps":"https://wonderful-field-065481810.7.azurestaticapps.net/"
+    "Azure Apps":"https://wonderful-field-065481810.7.azurestaticapps.net/",
+    "Claims Management System":"https://salmon-dune-0cf658810.7.azurestaticapps.net/"
   };
   const DESC={
     A:"Data extraction, modelling and Power BI reporting.",
@@ -903,13 +904,20 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     "Investment Portfolio Monitor":"AI investment-portfolio monitoring platform.",
     "AI Automation Agents":"Reusable AI automation agents being prototyped for future release.",
     "Sallaum Executive App":"Executive app bringing the unit's key reports and insights into one place for leadership.",
-    "Azure Apps":"Custom apps hosted on Azure — the unit's internal app portal."
+    "Azure Apps":"Custom apps hosted on Azure — the unit's internal app portal.",
+    "Claims Management System":"Automates extracting information from claim emails, processing them, and searching for additional data to take action.",
+    "Finance Department Agent":"A suite of finance agents — receivables aging, billable items, Lomé bookings, item-loaded analysis and FRP benchmarking.",
+    "Receivables Aging Report":"Agent that generates the receivables aging report.",
+    "Billable Items":"Agent that identifies and compiles billable items.",
+    "Lome Bookings Analysis":"Agent that analyses Lomé bookings.",
+    "Item Loaded Analysis":"Agent that analyses items loaded.",
+    "FRP Benchmarking":"Agent that benchmarks FRP figures."
   };
   const groups={
     A:{label:"Data Analytics & Power BI",color:"#E2231A",projects:["Finance Module","Running Cost Report","Receivables Report","Sales Report","OEM Contract Report","Freight Module","Operations Report","Small & Ad-hoc Reports","SMC Module","Claims Report","Paginated Reports for AI","Foundation Report"],future:["Finance Module — More Controls","SMC Module — More Controls","Payables Module","Operations Report (MAC System)","Sustainability Report","Freight — More Controls","Nova Vault Report","Belgium Terminal Reports","Additional Companies Reports","Spot Sales → Sales CRM","Group Executive Cockpit","Claims Analytics","HR Analytics","Cash-flow & Treasury Forecast","Voyage & Vessel P&L"]},
     B:{label:"Automations",color:"#0E8C6B",projects:["Belgium Customs Automation","Paginated→CSV/SQL Flows","Finance Office Scripts / FRP"],subgroups:[{label:"Freight Department App",url:"https://polite-sky-039b05310.7.azurestaticapps.net/",projects:["Gouts / Pointe Noire Entry","Mercedes OEM Bookings"]}],future:["More Office Scripts","More Power Automate Pipelines","More Data-Entry Automations","Month-end Close Automation","AP Invoice 3-Way Match","Claims & HR Onboarding Workflows","Automated Report Distribution"]},
     C:{label:"Agents",color:"#E07B1A",projects:["Bookings PDF Agent","AI Chat Agents","Fuel Price Agent","Hesnes Report Agent","SMC Report Agent","Copilot Email Agents","Competitor Data Agent","Social Media Agent","Forecast Agent","Scheduling Agent"],future:["SMC Billing Anomaly Agent","Email Summary Agent (Fabric)","Cybersecurity Agent","Compliance Agent","Claims Data-Entry Agent","Company-wide AI Assistant","HR Agent","Finance Close & Reconciliation Agent","Multilingual Support Agent"]},
-    D:{label:"Research & Development",color:"#6D5BD0",projects:["Continuous Tech Watch","AI Automation Agents","Sallaum Executive App","Azure Apps"],future:["Stowage Optimization","Document Intelligence Pipeline"]},
+    D:{label:"Research & Development",color:"#6D5BD0",projects:["Continuous Tech Watch","AI Automation Agents","Sallaum Executive App","Azure Apps","Claims Management System"],subgroups:[{label:"Finance Department Agent",showLabel:true,projects:["Receivables Aging Report","Billable Items","Lome Bookings Analysis","Item Loaded Analysis","FRP Benchmarking"]}],future:["Stowage Optimization","Document Intelligence Pipeline"]},
     E:{label:"Tech Hold",color:"#2563EB",projects:["Personal Budgeting App","Corporate Finance App","Investment Portfolio Monitor","Market Monitoring Platform","Real Estate App"],future:["Claims CRM System","HR System","Compliance System","Unified Internal Portal (Fabric)","Sales CRM"]}
   };
   function makeNet(cfg){
@@ -930,7 +938,7 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     });
     if(!FUT && g.subgroups){ g.subgroups.forEach(sg=>{
       const sid=k+"::"+sg.label;
-      const sub={id:sid,label:sg.label,kind:"sub",color:g.color,r:13,group:k,status:"current",phase:Math.random()*6.283,url:sg.url||null,desc:DESC[sg.label]||""};
+      const sub={id:sid,label:sg.label,kind:"sub",color:g.color,r:13,group:k,status:"current",showLabel:!!sg.showLabel,phase:Math.random()*6.283,url:sg.url||null,desc:DESC[sg.label]||""};
       nodes.push(sub); links.push([hub,sub,96]);
       sg.projects.forEach(p=>{
         const n={id:k+":"+p,label:p,kind:"proj",color:g.color,r:7.5,group:k,status:"current",parent:sid,phase:Math.random()*6.283,url:sg.url||LINKS[p]||null,desc:DESC[p]||""};
@@ -1038,7 +1046,7 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     ctx.textAlign="center"; ctx.textBaseline="middle";
     nodes.forEach(n=>{
       if(!vis(n)) return;
-      if(n.kind==="sub") return;
+      if(n.kind==="sub" && !n.showLabel) return;
       const show = flt ? true : (n.kind!=="proj" || n===hovered || (hl&&near&&near.has(n)));
       if(!show) return;
       const dim = hl && n!==hl && !(near&&near.has(n)); if(dim) return;
