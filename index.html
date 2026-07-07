@@ -734,6 +734,9 @@ var st,ct,ut,lt,dt,ht,pt,gt,ft,mt=function(){function t(e,t,r){this.networkInter
    Work dots glow. `url` (optional) makes the update card + bell item open that link.
    Pillars: A=Analytics  B=Automations  C=Agents  D=R&D  E=Tech Hold. */
 const UPDATES=[
+  {date:"2026-07-06",type:"new",net:"current",scope:"R&D",title:"Sallaum Executive App is live",
+   note:"New executive app for leadership.",
+   color:"#6D5BD0",url:"https://salmon-pebble-0b292e810.7.azurestaticapps.net/",nodes:["D:Sallaum Executive App"]},
   {date:"2026-07-06",type:"new",net:"current",scope:"R&D",title:"Data Unit App added",
    note:"The Data & AI Unit's central app.",
    color:"#6D5BD0",nodes:["D:Data Unit App"]},
@@ -752,15 +755,12 @@ const UPDATES=[
   {date:"2026-06-29",type:"new",net:"current",scope:"R&D",title:"SMC App is live",
    note:"SMC reporting app — full SMC report plus a summarized daily report.",
    color:"#6D5BD0",url:"https://witty-sea-070a6c710.7.azurestaticapps.net",nodes:["D:SMC App"]},
-  {date:"2026-06-29",type:"new",net:"current",scope:"R&D",title:"Sallaum Executive App is live",
-   note:"Executive app bringing the unit's key reports and insights into one place for leadership — now linked from the map.",
-   color:"#6D5BD0",url:"https://wonderful-field-065481810.7.azurestaticapps.net/",nodes:["D:Sallaum Executive App"]},
+  {date:"2026-06-29",type:"new",net:"current",scope:"R&D",title:"Sallaum Analytics App is live",
+   note:"Analytics app surfacing the unit's key reports and insights in one place.",
+   color:"#6D5BD0",url:"https://wonderful-field-065481810.7.azurestaticapps.net/",nodes:["D:Sallaum Analytics App"]},
   {date:"2026-06-15",type:"new",net:"current",scope:"Agents",title:"Forecast & Scheduling agents in build",
    note:"Vessel forecasts and voyage scheduling from historical data, stock and OEM contracts.",
-   color:"#E07B1A",nodes:["C:Forecast Agent","C:Scheduling Agent"]},
-  {date:"2026-06-12",type:"mod",net:"current",scope:"Automations",title:"Belgium customs automation progressing",
-   note:"OCR for AXA/T1/EMR/IRP with automatic entry into Logisoft/Descartes — in build.",
-   color:"#0E8C6B",nodes:["B:Belgium Customs Automation"]}
+   color:"#E07B1A",nodes:["C:Forecast Agent","C:Scheduling Agent"]}
 ];
 
 /* ============ DATA ============ */
@@ -819,7 +819,8 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     // "Investment Portfolio Monitor":"https://wealthpathapp.netlify.app/",  // hidden for now
     "Corporate Finance App":"https://kind-hill-0577db810.7.azurestaticapps.net/",
     "Personal Budgeting App":"https://wealthpathpersonal.netlify.app/",
-    "Sallaum Executive App":"https://wonderful-field-065481810.7.azurestaticapps.net/",
+    "Sallaum Analytics App":"https://wonderful-field-065481810.7.azurestaticapps.net/",
+    "Sallaum Executive App":"https://salmon-pebble-0b292e810.7.azurestaticapps.net/",
     "Real Estate App":"https://salmon-beach-00b773a10.7.azurestaticapps.net/",
     "SMC App":"https://witty-sea-070a6c710.7.azurestaticapps.net",
     "Claims Management System":"https://salmon-dune-0cf658810.7.azurestaticapps.net/",
@@ -904,7 +905,8 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     "Corporate Finance App":"AI corporate finance and budgeting app for the CFO and CEO.",
     "Market Monitoring Platform":"AI market-monitoring platform — to be registered as a business.",
     "Investment Portfolio Monitor":"AI investment-portfolio monitoring platform.",
-    "Sallaum Executive App":"Executive app bringing the unit's key reports and insights into one place for leadership.",
+    "Sallaum Analytics App":"Analytics app surfacing the unit's key reports and insights in one place.",
+    "Sallaum Executive App":"Executive app for leadership.",
     "Data Unit App":"The Data & AI Unit's central app.",
     "Claims Management System":"Automates extracting information from claim emails, processing them, and searching for additional data to take action.",
     "Finance Department App":"A suite of finance agents — receivables aging, billable items, Lomé bookings, item-loaded analysis and FRP benchmarking."
@@ -913,7 +915,7 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     A:{label:"Data Analytics & Power BI",color:"#E2231A",projects:["Finance Module","Running Cost Report","Receivables Report","Sales Report","OEM Contract Report","Freight Module","Operations Report","Small & Ad-hoc Reports","SMC Module","Claims Report","Paginated Reports for AI","Foundation Report"],future:["Finance Module — More Controls","SMC Module — More Controls","Payables Module","Operations Report (MAC System)","Sustainability Report","Freight — More Controls","Nova Vault Report","Belgium Terminal Reports","Additional Companies Reports","Spot Sales → Sales CRM","Group Executive Cockpit","Claims Analytics","HR Analytics","Cash-flow & Treasury Forecast","Voyage & Vessel P&L"]},
     B:{label:"Automations",color:"#0E8C6B",projects:["Belgium Customs Automation","Gouts / Pointe Noire Entry","Mercedes OEM Bookings","Paginated→CSV/SQL Flows","Finance Office Scripts / FRP"],future:["More Office Scripts","More Power Automate Pipelines","More Data-Entry Automations","Month-end Close Automation","AP Invoice 3-Way Match","Claims & HR Onboarding Workflows","Automated Report Distribution"]},
     C:{label:"Agents",color:"#E07B1A",projects:["Bookings PDF Agent","AI Chat Agents","Fuel Price Agent","Hesnes Report Agent","Copilot Email Agents","Competitor Data Agent","Social Media Agent","Forecast Agent","Scheduling Agent"],future:["SMC Billing Anomaly Agent","Email Summary Agent (Fabric)","Cybersecurity Agent","Compliance Agent","Claims Data-Entry Agent","Company-wide AI Assistant","HR Agent","Finance Close & Reconciliation Agent","Multilingual Support Agent"]},
-    D:{label:"Research & Development",color:"#6D5BD0",projects:["Continuous Tech Watch","Sallaum Executive App","Claims Management System","Freight Department App","Finance Department App","Data Unit App","SMC App"],future:["Stowage Optimization","Document Intelligence Pipeline"]},
+    D:{label:"Research & Development",color:"#6D5BD0",projects:["Continuous Tech Watch","Sallaum Analytics App","Claims Management System","Freight Department App","Finance Department App","Data Unit App","SMC App","Sallaum Executive App"],future:["Stowage Optimization","Document Intelligence Pipeline"]},
     E:{label:"Tech Hold",color:"#2563EB",projects:["Personal Budgeting App","Corporate Finance App","Investment Portfolio Monitor","Market Monitoring Platform","Real Estate App"],future:["Claims CRM System","HR System","Compliance System","Unified Internal Portal (Fabric)","Sales CRM"]}
   };
   function makeNet(cfg){
