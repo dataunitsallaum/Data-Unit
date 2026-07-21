@@ -487,7 +487,7 @@ var st,ct,ut,lt,dt,ht,pt,gt,ft,mt=function(){function t(e,t,r){this.networkInter
 <section id="network"><div class="wrap">
   <div class="eyebrow">The work, mapped</div>
   <h2 style="font-size:28px">Current Work</h2>
-  <p class="lead">Five pillars branch into every project: <b>Data Analytics &amp; Power BI</b>, <b>Automations</b>, <b>Agents</b>, <b>Research &amp; Development</b> and <b>Tech Hold</b>. Click a pillar to isolate it, or hover and drag any dot.</p>
+  <p class="lead">Five pillars branch into every project: <b>Data Analytics &amp; Power BI</b>, <b>Automations</b>, <b>Agents</b>, <b>Apps</b> and <b>Tech Hold</b>. Click a pillar to isolate it, or hover and drag any dot.</p>
   <div class="netcard" style="margin-top:18px">
     <div class="top">
       <span class="hint">🖱️ Click a pillar to isolate · ringed dots (↗) open the live report · drag to rearrange</span>
@@ -496,7 +496,7 @@ var st,ct,ut,lt,dt,ht,pt,gt,ft,mt=function(){function t(e,t,r){this.networkInter
         <button class="fbtn" data-f="A"><i style="background:#E2231A"></i>Analytics</button>
         <button class="fbtn" data-f="B"><i style="background:#0E8C6B"></i>Automations</button>
         <button class="fbtn" data-f="C"><i style="background:#E07B1A"></i>Agents</button>
-        <button class="fbtn" data-f="D"><i style="background:#6D5BD0"></i>R&amp;D</button>
+        <button class="fbtn" data-f="D"><i style="background:#6D5BD0"></i>Apps</button>
         <button class="fbtn" data-f="E"><i style="background:#2563EB"></i>Tech Hold</button>
       </div>
     </div>
@@ -514,7 +514,7 @@ var st,ct,ut,lt,dt,ht,pt,gt,ft,mt=function(){function t(e,t,r){this.networkInter
         <button class="fbtn" data-f="A"><i style="background:#E2231A"></i>Analytics</button>
         <button class="fbtn" data-f="B"><i style="background:#0E8C6B"></i>Automations</button>
         <button class="fbtn" data-f="C"><i style="background:#E07B1A"></i>Agents</button>
-        <button class="fbtn" data-f="D"><i style="background:#6D5BD0"></i>R&amp;D</button>
+        <button class="fbtn" data-f="D"><i style="background:#6D5BD0"></i>Apps</button>
         <button class="fbtn" data-f="E"><i style="background:#2563EB"></i>Tech Hold</button>
       </div>
     </div>
@@ -734,33 +734,33 @@ var st,ct,ut,lt,dt,ht,pt,gt,ft,mt=function(){function t(e,t,r){this.networkInter
    Work dots glow. `url` (optional) makes the update card + bell item open that link.
    Pillars: A=Analytics  B=Automations  C=Agents  D=R&D  E=Tech Hold. */
 const UPDATES=[
-  {date:"2026-07-06",type:"new",net:"current",scope:"R&D",title:"Sallaum Executive App is live",
+  {date:"2026-07-06",type:"new",net:"current",scope:"Apps",title:"Scheduling and Forecast App is live",
+   note:"Vessel forecasts and voyage scheduling in one app.",
+   color:"#6D5BD0",url:"https://nice-pebble-082bbc110.7.azurestaticapps.net/",nodes:["D:Scheduling and Forecast App"]},
+  {date:"2026-07-06",type:"new",net:"current",scope:"Apps",title:"Stem Bunker Desk is live",
+   note:"Bunker desk app for stem nominations and fuel management.",
+   color:"#6D5BD0",url:"https://black-rock-0ede20010.7.azurestaticapps.net/",nodes:["D:Stem Bunker Desk"]},
+  {date:"2026-07-06",type:"new",net:"current",scope:"Apps",title:"Sallaum Executive App is live",
    note:"New executive app for leadership.",
    color:"#6D5BD0",url:"https://salmon-pebble-0b292e810.7.azurestaticapps.net/",nodes:["D:Sallaum Executive App"]},
-  {date:"2026-07-06",type:"new",net:"current",scope:"R&D",title:"Data Unit App added",
+  {date:"2026-07-06",type:"new",net:"current",scope:"Apps",title:"Data Unit App added",
    note:"The Data & AI Unit's central app.",
    color:"#6D5BD0",nodes:["D:Data Unit App"]},
-  {date:"2026-07-06",type:"new",net:"current",scope:"R&D",title:"Finance Department App is live",
+  {date:"2026-07-06",type:"new",net:"current",scope:"Apps",title:"Finance Department App is live",
    note:"A suite of finance agents — receivables aging, billable items, Lomé bookings, item-loaded analysis and FRP benchmarking.",
    color:"#6D5BD0",url:"https://lemon-pebble-02b823510.7.azurestaticapps.net/",nodes:["D:Finance Department App"]},
-  {date:"2026-07-06",type:"new",net:"current",scope:"R&D",title:"Claims Management System is live",
+  {date:"2026-07-06",type:"new",net:"current",scope:"Apps",title:"Claims Management System is live",
    note:"Automates extracting information from claim emails, processing them, and searching for additional data to take action.",
    color:"#6D5BD0",url:"https://salmon-dune-0cf658810.7.azurestaticapps.net/",nodes:["D:Claims Management System"]},
   {date:"2026-06-29",type:"new",net:"current",scope:"Tech Hold",title:"Real Estate App is live",
    note:"AI-integrated real estate platform — now linked from the Tech Hold pillar.",
    color:"#2563EB",url:"https://salmon-beach-00b773a10.7.azurestaticapps.net/",nodes:["E:Real Estate App"]},
-  {date:"2026-06-29",type:"new",net:"current",scope:"R&D",title:"Freight Department App is live",
+  {date:"2026-06-29",type:"new",net:"current",scope:"Apps",title:"Freight Department App is live",
    note:"Freight department app for Gouts / Pointe Noire entry and Mercedes OEM bookings.",
    color:"#6D5BD0",url:"https://polite-sky-039b05310.7.azurestaticapps.net/",nodes:["D:Freight Department App"]},
-  {date:"2026-06-29",type:"new",net:"current",scope:"R&D",title:"SMC App is live",
+  {date:"2026-06-29",type:"new",net:"current",scope:"Apps",title:"SMC App is live",
    note:"SMC reporting app — full SMC report plus a summarized daily report.",
-   color:"#6D5BD0",url:"https://witty-sea-070a6c710.7.azurestaticapps.net",nodes:["D:SMC App"]},
-  {date:"2026-06-29",type:"new",net:"current",scope:"R&D",title:"Sallaum Analytics App is live",
-   note:"Analytics app surfacing the unit's key reports and insights in one place.",
-   color:"#6D5BD0",url:"https://wonderful-field-065481810.7.azurestaticapps.net/",nodes:["D:Sallaum Analytics App"]},
-  {date:"2026-06-15",type:"new",net:"current",scope:"Agents",title:"Forecast & Scheduling agents in build",
-   note:"Vessel forecasts and voyage scheduling from historical data, stock and OEM contracts.",
-   color:"#E07B1A",nodes:["C:Forecast Agent","C:Scheduling Agent"]}
+   color:"#6D5BD0",url:"https://witty-sea-070a6c710.7.azurestaticapps.net",nodes:["D:SMC App"]}
 ];
 
 /* ============ DATA ============ */
@@ -825,13 +825,15 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     "SMC App":"https://witty-sea-070a6c710.7.azurestaticapps.net",
     "Claims Management System":"https://salmon-dune-0cf658810.7.azurestaticapps.net/",
     "Freight Department App":"https://polite-sky-039b05310.7.azurestaticapps.net/",
-    "Finance Department App":"https://lemon-pebble-02b823510.7.azurestaticapps.net/"
+    "Finance Department App":"https://lemon-pebble-02b823510.7.azurestaticapps.net/",
+    "Scheduling and Forecast App":"https://nice-pebble-082bbc110.7.azurestaticapps.net/",
+    "Stem Bunker Desk":"https://black-rock-0ede20010.7.azurestaticapps.net/"
   };
   const DESC={
     A:"Data extraction, modelling and Power BI reporting.",
     B:"RPA flows, Power Automate and Office Scripts that act on data.",
     C:"AI agents that read data, reason and take action.",
-    D:"Internal tech research and AI product prototypes.",
+    D:"The unit's custom apps and prototypes.",
     E:"AI-integrated products being spun up as standalone ventures.",
     "Finance Module — More Controls":"Additional controls and reporting depth for the Sallaum Lines Finance Module.",
     "SMC Module — More Controls":"Additional controls and analytics for the Sallaum Medical Center module.",
@@ -909,13 +911,15 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     "Sallaum Executive App":"Executive app for leadership.",
     "Data Unit App":"The Data & AI Unit's central app.",
     "Claims Management System":"Automates extracting information from claim emails, processing them, and searching for additional data to take action.",
-    "Finance Department App":"A suite of finance agents — receivables aging, billable items, Lomé bookings, item-loaded analysis and FRP benchmarking."
+    "Finance Department App":"A suite of finance agents — receivables aging, billable items, Lomé bookings, item-loaded analysis and FRP benchmarking.",
+    "Scheduling and Forecast App":"Vessel forecasts and voyage scheduling in one app.",
+    "Stem Bunker Desk":"Bunker desk app for stem nominations and fuel management."
   };
   const groups={
     A:{label:"Data Analytics & Power BI",color:"#E2231A",projects:["Finance Module","Running Cost Report","Receivables Report","Sales Report","OEM Contract Report","Freight Module","Operations Report","Small & Ad-hoc Reports","SMC Module","Claims Report","Paginated Reports for AI","Foundation Report"],future:["Finance Module — More Controls","SMC Module — More Controls","Payables Module","Operations Report (MAC System)","Sustainability Report","Freight — More Controls","Nova Vault Report","Belgium Terminal Reports","Additional Companies Reports","Spot Sales → Sales CRM","Group Executive Cockpit","Claims Analytics","HR Analytics","Cash-flow & Treasury Forecast","Voyage & Vessel P&L"]},
     B:{label:"Automations",color:"#0E8C6B",projects:["Belgium Customs Automation","Gouts / Pointe Noire Entry","Mercedes OEM Bookings","Paginated→CSV/SQL Flows","Finance Office Scripts / FRP"],future:["More Office Scripts","More Power Automate Pipelines","More Data-Entry Automations","Month-end Close Automation","AP Invoice 3-Way Match","Claims & HR Onboarding Workflows","Automated Report Distribution"]},
     C:{label:"Agents",color:"#E07B1A",projects:["Bookings PDF Agent","AI Chat Agents","Fuel Price Agent","Hesnes Report Agent","Copilot Email Agents","Competitor Data Agent","Social Media Agent","Forecast Agent","Scheduling Agent"],future:["SMC Billing Anomaly Agent","Email Summary Agent (Fabric)","Cybersecurity Agent","Compliance Agent","Claims Data-Entry Agent","Company-wide AI Assistant","HR Agent","Finance Close & Reconciliation Agent","Multilingual Support Agent"]},
-    D:{label:"Research & Development",color:"#6D5BD0",projects:["Continuous Tech Watch","Sallaum Analytics App","Claims Management System","Freight Department App","Finance Department App","Data Unit App","SMC App","Sallaum Executive App"],future:["Stowage Optimization","Document Intelligence Pipeline"]},
+    D:{label:"Apps",color:"#6D5BD0",projects:["Continuous Tech Watch","Sallaum Analytics App","Claims Management System","Freight Department App","Finance Department App","Data Unit App","SMC App","Sallaum Executive App","Scheduling and Forecast App","Stem Bunker Desk"],future:["Stowage Optimization","Document Intelligence Pipeline"]},
     E:{label:"Tech Hold",color:"#2563EB",projects:["Personal Budgeting App","Corporate Finance App","Investment Portfolio Monitor","Market Monitoring Platform","Real Estate App"],future:["Claims CRM System","HR System","Compliance System","Unified Internal Portal (Fabric)","Sales CRM"]}
   };
   function makeNet(cfg){
