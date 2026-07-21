@@ -728,16 +728,17 @@ var st,ct,ut,lt,dt,ht,pt,gt,ft,mt=function(){function t(e,t,r){this.networkInter
 <script>
 /* ============ UPDATES (notifications feed) ============
    Glow + notifications are scoped to CURRENT WORK only.
-   Add newest entries at the TOP. Keep the list to a MAX of 9 — when you add a new
-   one, delete the oldest at the bottom so it never exceeds 9.
+   Add newest entries at the TOP. `date` MUST be the ACTUAL date the item was added
+   (today's real calendar date) — do NOT copy the date from the entry above.
+   Keep the list to a MAX of 9 — when you add a new one, delete the oldest at the bottom.
    `nodes` (["<pillar>:<exact current-net label>", ...]) make the matching Current
    Work dots glow. `url` (optional) makes the update card + bell item open that link.
-   Pillars: A=Analytics  B=Automations  C=Agents  D=R&D  E=Tech Hold. */
+   Pillars: A=Analytics  B=Automations  C=Agents  D=Apps  E=Tech Hold. */
 const UPDATES=[
-  {date:"2026-07-06",type:"new",net:"current",scope:"Apps",title:"Scheduling and Forecast App is live",
+  {date:"2026-07-21",type:"new",net:"current",scope:"Apps",title:"Scheduling and Forecast App is live",
    note:"Vessel forecasts and voyage scheduling in one app.",
    color:"#6D5BD0",url:"https://nice-pebble-082bbc110.7.azurestaticapps.net/",nodes:["D:Scheduling and Forecast App"]},
-  {date:"2026-07-06",type:"new",net:"current",scope:"Apps",title:"Stem Bunker Desk is live",
+  {date:"2026-07-21",type:"new",net:"current",scope:"Apps",title:"Stem Bunker Desk is live",
    note:"Bunker desk app for stem nominations and fuel management.",
    color:"#6D5BD0",url:"https://black-rock-0ede20010.7.azurestaticapps.net/",nodes:["D:Stem Bunker Desk"]},
   {date:"2026-07-06",type:"new",net:"current",scope:"Apps",title:"Sallaum Executive App is live",
