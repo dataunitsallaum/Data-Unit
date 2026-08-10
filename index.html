@@ -1200,5 +1200,57 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
   route();
 })();
 </script>
+<script>
+/* Usage telemetry — mirrors src/lib/usage.ts from dataunitsallaum/sallaum-app-usage.
+   Inline because this app is a single static HTML file with no build step. Same
+   rules as the module: identity comes from the verified id_token server-side, an
+   app with sign-in NEVER reports anonymously, and every failure is swallowed so
+   telemetry can't break the dashboard. */
+(function () {
+  try {
+    var APP = "dataunit";
+    var URL_ = "https://bqgbauoblybgigbussle.supabase.co/functions/v1/usage-ingest";
+    var sid = (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+              : "s-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
+    var q = [{ event: "session_start", session_id: sid }], tok = null, exp = 0;
+
+    function instance() { try { return typeof pca !== "undefined" ? pca : null; } catch (e) { return null; } }
+
+    function token() {
+      if (tok && exp && Date.now() < exp - 300000) return Promise.resolve(tok);
+      var p = instance(); if (!p || !p.getActiveAccount) return Promise.resolve(null);
+      var a = p.getActiveAccount(); if (!a) return Promise.resolve(null);
+      return p.acquireTokenSilent({ scopes: ["openid", "profile", "email"], account: a })
+        .then(function (r) {
+          tok = r && r.idToken ? r.idToken : null;
+          try { exp = (JSON.parse(atob(tok.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))).exp || 0) * 1000; }
+          catch (e) { exp = 0; }
+          return tok;
+        })
+        .catch(function () { return null; });
+    }
+
+    function flush(final) {
+      if (!q.length) return;
+      var batch = q; q = [];
+      token().then(function (t) {
+        // No token yet (user still signing in): hold rather than write a phantom
+        // anonymous session; drop outright if the page is going away.
+        if (!t) { if (!final) q = batch.concat(q).slice(-200); return; }
+        fetch(URL_, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "x-entra-token": t },
+          body: JSON.stringify({ app: APP, events: batch }),
+          keepalive: !!final
+        }).catch(function () { if (!final) q = batch.concat(q).slice(-200); });
+      });
+    }
+
+    setInterval(function () { flush(false); }, 15000);
+    setInterval(function () { if (document.visibilityState === "visible") q.push({ event: "heartbeat", session_id: sid }); }, 60000);
+    addEventListener("pagehide", function () { q.push({ event: "session_end", session_id: sid }); flush(true); });
+  } catch (e) { /* never break the app */ }
+})();
+</script>
 </body>
 </html>
