@@ -23,16 +23,16 @@ The Data & AI Unit dashboard is a one-page overview of the unit's work. It maps 
 
 To sign out, click "Sign out" in the dark footer at the bottom of the page.
 
-If sign-in fails, the screen shows "Sign-in failed" and a "Try again" button. Click it once. If it fails again, contact the Data & AI Unit.
+If sign-in fails, the screen shows "Sign-in failed" and a "Try again" button. It can also say it could not load the Microsoft sign-in library. In both cases, click "Try again" once. If it fails again, contact the Data & AI Unit.
 
 A second copy of the page lives at https://data-ai-unit.netlify.app. The unit updates that copy by hand. It can be older than the main site.
 
 Getting into the dashboard does not open the linked reports and apps for you. Each one has its own sign-in and its own access list.
 
 ## Page: Menu bar and What's new bell
-The navy bar at the top has five links: Updates, Neural Net, Delivery, 2026 Roadmap and AI Strategy. Each link jumps to that part of the page. "Neural Net" jumps to the Current Work and Future Work maps. On a phone or narrow window the links are hidden. Scroll down instead.
+The white bar at the top has five links: Updates, Neural Net, Delivery, 2026 Roadmap and AI Strategy. Each link jumps to that part of the page. "Neural Net" jumps to the Current Work and Future Work maps. On a phone or narrow window the links are hidden. Scroll down instead.
 
-The bell icon on the right opens the "What's new" panel. The panel lists the same items as the Latest updates cards. Each item shows a "New" or "Updated" tag, a short note, the pillar and the date. Click an item with a ↗ arrow to open that app in a new tab. Click an item without an arrow to jump to the Current Work map. "Mark all read" clears the red number on the bell.
+The bell icon on the right opens the "What's new" panel. The panel lists the same items as the Latest updates cards. Each item shows a "New" or "Updated" tag, a short note, the pillar and the date. Click an item with a ↗ arrow to open that app in a new tab. Click an item without an arrow to jump to the Current Work map. Opening the panel clears the red number on the bell. "Mark all read" clears it too.
 
 ## Page: Overview banner and headline figures
 The banner at the top sums up two years of the unit's work. It names the three organizations served and the main tools, such as Power BI, NetSuite, Logisoft, Claude and Copilot.
@@ -61,8 +61,9 @@ The Current Work map shows delivered and in-progress projects as a moving networ
 Controls:
 - Hover over a dot to see its name and a one-line description.
 - A dot with a ring and a ↗ arrow opens its live report or app. Click it, or tap it on a phone.
-- Click a pillar dot, or a pillar button at the top right, to show only that pillar. All its project names then appear in a circle.
-- Click "All", or the centre dot, to show every pillar again.
+- The pillar buttons at the top right are All, Analytics, Automations, Agents, Apps and Tech Hold.
+- Click a pillar dot, or a pillar button, to show only that pillar. All its project names then appear in a circle.
+- Click "All", or click the pillar dot again, to show every pillar again.
 - Drag any dot to move it. This only changes your screen.
 - A glowing, pulsing dot is one of the items in Latest updates.
 
@@ -158,22 +159,22 @@ It explains three things:
 - **Organizations served (3):** Sallaum Lines, Sallaum Medical Center and the Sallaum Humanity Foundation.
 - **Departments covered (8):** a fixed figure written by the unit.
 - **Solutions delivered (30+):** a fixed figure written by the unit. It is not a count of the dots on the map.
-- **Hours per month saved (450+):** the sum of the "Est. saved" figures on the delivery cards (100 + 200 + 20 + 12 + 15 + 100 + 10 = 457). These are the unit's estimates. They are not measured.
+- **Hours per month saved (450+):** a fixed figure. It matches the sum of the "Est. saved" figures on the delivery cards (100 + 200 + 20 + 12 + 15 + 100 + 10 = 457). These are the unit's estimates. They are not measured.
 - **AI initiatives live 2026 (6+):** a fixed figure written by the unit.
 - **Reporting turnaround (Days → min):** reports that used to take days now take minutes.
-- **Support hrs/mo:** the hours the unit spends each month supporting that area.
+- **Support hrs/mo:** the monthly support hours the card lists for that area. Only four cards show one.
 - **Est. saved hrs/mo:** staff hours the unit estimates it saves that area each month.
 - **Card badge (for example "4 months"):** the delivery timeline for that area.
 - **Update date:** the day the unit added the item to the dashboard. It is not always the go-live date.
 - **Dots:** solid means delivered or in progress. Hollow and dashed means planned. A ring with ↗ opens a link. A glow means the project is in Latest updates.
-- **Bell number:** updates not yet opened on this browser.
+- **Bell number:** how many items were added since you last opened the bell. It is kept in this browser only.
 
 ## Common questions
 **Is the data on this dashboard live?**
 No. The unit writes every figure and list by hand. Nothing refreshes on its own.
 
 **How is the 450+ hours saved worked out?**
-It adds up the estimated monthly hours saved on the delivery cards. The total is 457 hours. The figures are estimates, not measurements.
+It is a fixed figure. It matches the total of the estimated monthly hours saved on the delivery cards, which is 457 hours. The figures are estimates, not measurements.
 
 **Why can I not open a report from the map?**
 The dashboard only links to it. The report or app checks your access separately. Ask its owner for access.
@@ -185,7 +186,7 @@ That report sits in a different Microsoft tenant from the other links. A Sallaum
 The menu hides its links on narrow screens. Scroll down to reach each section.
 
 **Why did the bell not show a new number?**
-The bell counts items you have not opened on this browser. It can miss new items once the feed is full. Check the dates on the Latest updates cards instead.
+The bell counts how many items the feed holds, not which ones. The feed holds nine at most. Once it is full, a new item replaces the oldest and the count stays the same. Check the dates on the Latest updates cards instead.
 
 **Where is the AI Model page?**
 Its menu link is switched off. Add #aimodel to the end of the web address to open it.

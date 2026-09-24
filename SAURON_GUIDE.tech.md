@@ -13,11 +13,11 @@ The whole app is one file, `index.html`, about 450 KB. It has no build step, no 
 ## Data sources
 The dashboard reads no live data. It does not query Power BI, NetSuite, SharePoint or Supabase. Every figure, list, date and link is written into `index.html` by hand. The unit keeps a solutions tracker workbook (`Data-AI-Unit-Solutions-Tracker.xlsx`) outside the repo. Nothing links it to the page.
 
-The only outbound call is the usage telemetry beacon. See "Usage telemetry".
+Apart from Microsoft sign-in, the only outbound call is the usage telemetry beacon. See "Usage telemetry".
 
 ## Content data objects
 All content edits happen in a few objects inside the main `<script>` block.
-- `UPDATES`: the notification feed. One array drives three things: the Latest updates cards, the bell panel and the glowing dots on the Current Work map. Each entry has `date`, `type` ("new" or "mod"), `net`, `scope`, `title`, `note`, `color`, an optional `url` and `nodes`.
+- `UPDATES`: the notification feed. One array drives three things: the Latest updates cards, the bell panel and the glowing dots on the Current Work map. Each entry has `date`, `type` ("new" or "mod"), `net`, `scope`, `title`, `note`, `color`, an optional `url` and `nodes`. The code never reads `net`. The cards and the bell show only the first nine entries.
 - `ROAD`: the ten rows of the 2026 roadmap table. Each row is name, departments, description, priority (`h`, `m` or `l`) and timeline.
 - `LINKS`: project name to URL. A project with a link gets a ring and a ↗ and opens in a new tab.
 - `DESC`: project name (or pillar key) to tooltip text.
@@ -77,7 +77,7 @@ See "Known gotchas" for why it likely sends nothing today.
 ## Deployment
 - Repo: `dataunitsallaum/Data-Unit`, branch `main`. Working copy on Wael's device: `Downloads\Data Unit App\sallaum-dashboard-azure`.
 - Host: Azure Static Web Apps, Free plan, at https://nice-sea-0604a7a10.7.azurestaticapps.net.
-- A push to `main` runs the GitHub Actions workflow `.github/workflows/azure-static-web-apps-nice-sea-0604a7a10.yml`. It uploads the repo root with no build. The site is live in about 1-2 minutes.
+- A push to `main` runs the GitHub Actions workflow `.github/workflows/azure-static-web-apps-nice-sea-0604a7a10.yml`. It uploads the repo root with no build. The site is live in about 1-2 minutes. Pull requests to `main` also get a preview deploy from the same workflow.
 - The workflow authenticates with the repo secret `AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_SEA_0604A7A10`.
 - Netlify (https://data-ai-unit.netlify.app) is a separate copy. It is updated by manual drag-and-drop of `index.html`. It does not auto-deploy.
 - The owner's standing rule: publish only when asked. Commit, push, then hard-refresh with Ctrl+Shift+R.
