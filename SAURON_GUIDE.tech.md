@@ -62,7 +62,7 @@ Sign-in runs in the browser with MSAL. It is locked to the Sallaum Microsoft ten
 - The gate is soft. MSAL controls who sees the rendered page, but the static HTML can still be downloaded without sign-in. The file holds no secrets. It does hold the Power BI share links and app URLs. Each of those has its own sign-in.
 - A true edge-level gate needs the Azure Static Web Apps Standard plan (about $9 per month) plus a single-tenant Entra registration. It is not set up.
 - `staticwebapp.config.json` rewrites every path to `index.html` and sets the `X-Content-Type-Options: nosniff` and `X-Frame-Options: SAMEORIGIN` headers.
-- The dashboard is not on the Sallaum Enterprises portal list. Sauron treats it as admin-only.
+- The dashboard is not on the Sallaum Enterprises portal list. SAIL treats it as admin-only.
 
 ## Usage telemetry
 An inline beacon at the end of `index.html` mirrors the shared usage module from the App Usage Analytics project. It reports under the app name `dataunit`.

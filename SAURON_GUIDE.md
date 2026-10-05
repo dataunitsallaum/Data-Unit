@@ -13,7 +13,7 @@ The Data & AI Unit dashboard is a one-page overview of the unit's work. It maps 
 - Sallaum management use it to follow what the Data & AI Unit delivers and plans.
 - The Data & AI Unit prepares and updates it. The page names Wael Frashy, Lead, Data & AI Unit, as its author.
 - Anyone with a Sallaum Microsoft account can open it.
-- It is not on the Sallaum Enterprises portal list. Sauron answers questions about it for portal admins only.
+- It is not on the Sallaum Enterprises portal list. SAIL answers questions about it for portal admins only.
 
 ## Getting in
 1. Open https://nice-sea-0604a7a10.7.azurestaticapps.net in your browser.
