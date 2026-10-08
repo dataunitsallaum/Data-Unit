@@ -106,7 +106,7 @@
   .hero .meta{margin-top:26px;font-size:13px;color:#9fb2cd}
 
   /* ---- KPI strip ---- */
-  .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:-38px;position:relative;z-index:5}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:14px;margin-top:-38px;position:relative;z-index:5}
   @media(max-width:980px){.kpis{grid-template-columns:repeat(3,1fr)}}
   @media(max-width:560px){.kpis{grid-template-columns:repeat(2,1fr)}}
   .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;box-shadow:var(--shadow)}
@@ -386,6 +386,17 @@ var st,ct,ut,lt,dt,ht,pt,gt,ft,mt=function(){function t(e,t,r){this.networkInter
   function fail(msg){ var s=document.getElementById("agSpin"); if(s) s.style.display="none";
     var e=document.getElementById("agErr"); if(e) e.innerHTML=msg+'<br><button class="ag-btn" onclick="location.reload()">Try again</button>'; }
   window.__signOut=function(){};
+  // Real hours from the Work Log. Shown only when wl-api lets this person read work pages.
+  // ponytail: previous month by UTC, a few hours off at month edges.
+  function wlHours(pca, acct){
+    var d=new Date(), m=new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth()-1, 15)).toISOString().slice(0,7);
+    pca.acquireTokenSilent({ scopes:["openid","profile"], account:acct }).then(function(r){
+      return fetch("https://bqgbauoblybgigbussle.supabase.co/functions/v1/wl-api?op=overview&month="+m, { headers:{ "x-entra-token": r.idToken } });
+    }).then(function(res){ return res.ok ? res.json() : null; }).then(function(o){
+      var el=document.getElementById("wl-hours"); if(!o||!o.tiles||!el) return;
+      el.querySelector(".n").textContent=Math.round((o.tiles.wael_s+(o.tiles.manual_s||0))/3600); el.hidden=false;
+    }).catch(function(){});
+  }
   // Enforce sign-in on any real deployed host (Azure, Netlify, custom domains); skip only for local file/preview.
   var h=location.hostname;
   var enforce=!(h==="localhost"||h==="127.0.0.1"||h==="0.0.0.0"||h===""||location.protocol==="file:");
@@ -413,7 +424,7 @@ var st,ct,ut,lt,dt,ht,pt,gt,ft,mt=function(){function t(e,t,r){this.networkInter
     window.__signOut=function(){ try{ pca.logoutRedirect({ account:pca.getAllAccounts()[0], postLogoutRedirectUri:window.location.origin }); }catch(e){} };
     pca.handleRedirectPromise().then(function(res){
       var acct=(res&&res.account)?res.account:(pca.getAllAccounts()[0]||null);
-      if(acct){ pca.setActiveAccount(acct); reveal(); }
+      if(acct){ pca.setActiveAccount(acct); reveal(); wlHours(pca, acct); }
       else { pca.loginRedirect({ scopes:["openid","profile"] }); }
     }).catch(function(err){ fail("Sign-in failed. "+((err&&err.errorMessage)||"Please try again.")); });
   });
@@ -472,6 +483,7 @@ var st,ct,ut,lt,dt,ht,pt,gt,ft,mt=function(){function t(e,t,r){this.networkInter
     <div class="kpi red"><div class="n" data-count="450">450<small>+</small></div><div class="l">Hrs/month saved (est.)</div></div>
     <div class="kpi"><div class="n" data-count="6">6<small>+</small></div><div class="l">AI initiatives live 2026</div></div>
     <div class="kpi red"><div class="n">Days<small>→min</small></div><div class="l">Reporting turnaround</div></div>
+    <div class="kpi" id="wl-hours" hidden><div class="n">0</div><div class="l">Hrs logged last month</div></div>
   </div>
 </div>
 
@@ -735,6 +747,9 @@ var st,ct,ut,lt,dt,ht,pt,gt,ft,mt=function(){function t(e,t,r){this.networkInter
    Work dots glow. `url` (optional) makes the update card + bell item open that link.
    Pillars: A=Analytics  B=Automations  C=Agents  D=Apps  E=Tech Hold. */
 const UPDATES=[
+  {date:"2026-10-08",type:"new",net:"current",scope:"Apps",title:"Data Unit Work Log is live",
+   note:"Hours, tasks and API value for every Claude request.",
+   color:"#6D5BD0",url:"https://sallaumworklog.netlify.app/",nodes:["D:Data Unit Work Log"]},
   {date:"2026-07-21",type:"new",net:"current",scope:"Apps",title:"Scheduling and Forecast App is live",
    note:"Vessel forecasts and voyage scheduling in one app.",
    color:"#6D5BD0",url:"https://nice-pebble-082bbc110.7.azurestaticapps.net/",nodes:["D:Scheduling and Forecast App"]},
@@ -758,10 +773,7 @@ const UPDATES=[
    color:"#2563EB",url:"https://salmon-beach-00b773a10.7.azurestaticapps.net/",nodes:["E:Real Estate App"]},
   {date:"2026-06-29",type:"new",net:"current",scope:"Apps",title:"Freight Department App is live",
    note:"Freight department app for Gouts / Pointe Noire entry and Mercedes OEM bookings.",
-   color:"#6D5BD0",url:"https://polite-sky-039b05310.7.azurestaticapps.net/",nodes:["D:Freight Department App"]},
-  {date:"2026-06-29",type:"new",net:"current",scope:"Apps",title:"SMC App is live",
-   note:"SMC reporting app — full SMC report plus a summarized daily report.",
-   color:"#6D5BD0",url:"https://witty-sea-070a6c710.7.azurestaticapps.net",nodes:["D:SMC App"]}
+   color:"#6D5BD0",url:"https://polite-sky-039b05310.7.azurestaticapps.net/",nodes:["D:Freight Department App"]}
 ];
 
 /* ============ DATA ============ */
@@ -828,7 +840,8 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     "Freight Department App":"https://polite-sky-039b05310.7.azurestaticapps.net/",
     "Finance Department App":"https://lemon-pebble-02b823510.7.azurestaticapps.net/",
     "Scheduling and Forecast App":"https://nice-pebble-082bbc110.7.azurestaticapps.net/",
-    "Stem Bunker Desk":"https://black-rock-0ede20010.7.azurestaticapps.net/"
+    "Stem Bunker Desk":"https://black-rock-0ede20010.7.azurestaticapps.net/",
+    "Data Unit Work Log":"https://sallaumworklog.netlify.app/"
   };
   const DESC={
     A:"Data extraction, modelling and Power BI reporting.",
@@ -913,13 +926,14 @@ document.querySelectorAll(".kpi .n[data-count]").forEach(el=>{
     "Claims Management System":"Automates extracting information from claim emails, processing them, and searching for additional data to take action.",
     "Finance Department App":"A suite of finance agents — receivables aging, billable items, Lomé bookings, item-loaded analysis and FRP benchmarking.",
     "Scheduling and Forecast App":"Vessel forecasts and voyage scheduling in one app.",
-    "Stem Bunker Desk":"Bunker desk app for stem nominations and fuel management."
+    "Stem Bunker Desk":"Bunker desk app for stem nominations and fuel management.",
+    "Data Unit Work Log":"Every Claude request logged as hours, tasks and API value."
   };
   const groups={
     A:{label:"Data Analytics & Power BI",color:"#E2231A",projects:["Finance Module","Running Cost Report","Receivables Report","Sales Report","OEM Contract Report","Freight Module","Operations Report","Small & Ad-hoc Reports","SMC Module","Claims Report","Paginated Reports for AI","Foundation Report"],future:["Finance Module — More Controls","SMC Module — More Controls","Payables Module","Operations Report (MAC System)","Sustainability Report","Freight — More Controls","Nova Vault Report","Belgium Terminal Reports","Additional Companies Reports","Spot Sales → Sales CRM","Group Executive Cockpit","Claims Analytics","HR Analytics","Cash-flow & Treasury Forecast","Voyage & Vessel P&L"]},
     B:{label:"Automations",color:"#0E8C6B",projects:["Belgium Customs Automation","Gouts / Pointe Noire Entry","Mercedes OEM Bookings","Paginated→CSV/SQL Flows","Finance Office Scripts / FRP"],future:["More Office Scripts","More Power Automate Pipelines","More Data-Entry Automations","Month-end Close Automation","AP Invoice 3-Way Match","Claims & HR Onboarding Workflows","Automated Report Distribution"]},
     C:{label:"Agents",color:"#E07B1A",projects:["Bookings PDF Agent","AI Chat Agents","Fuel Price Agent","Hesnes Report Agent","Copilot Email Agents","Competitor Data Agent","Social Media Agent","Forecast Agent","Scheduling Agent"],future:["SMC Billing Anomaly Agent","Email Summary Agent (Fabric)","Cybersecurity Agent","Compliance Agent","Claims Data-Entry Agent","Company-wide AI Assistant","HR Agent","Finance Close & Reconciliation Agent","Multilingual Support Agent"]},
-    D:{label:"Apps",color:"#6D5BD0",projects:["Sallaum Analytics App","Claims Management System","Freight Department App","Finance Department App","Data Unit App","SMC App","Sallaum Executive App","Scheduling and Forecast App","Stem Bunker Desk"],future:["Stowage Optimization","Document Intelligence Pipeline"]},
+    D:{label:"Apps",color:"#6D5BD0",projects:["Sallaum Analytics App","Claims Management System","Freight Department App","Finance Department App","Data Unit App","SMC App","Sallaum Executive App","Scheduling and Forecast App","Stem Bunker Desk","Data Unit Work Log"],future:["Stowage Optimization","Document Intelligence Pipeline"]},
     E:{label:"Tech Hold",color:"#2563EB",projects:["Personal Budgeting App","Corporate Finance App","Investment Portfolio Monitor","Market Monitoring Platform","Real Estate App"],future:["Claims CRM System","HR System","Compliance System","Unified Internal Portal (Fabric)","Sales CRM"]}
   };
   function makeNet(cfg){
