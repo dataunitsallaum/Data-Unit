@@ -421,6 +421,9 @@ var st,ct,ut,lt,dt,ht,pt,gt,ft,mt=function(){function t(e,t,r){this.networkInter
         redirectUri:window.location.origin },
       cache:{ cacheLocation:"sessionStorage" }
     });
+    // Global so the usage beacon, a separate script at the end of this page, can
+    // reach it. Without this its token() always got null and it never sent a row.
+    window.pca=pca;
     window.__signOut=function(){ try{ pca.logoutRedirect({ account:pca.getAllAccounts()[0], postLogoutRedirectUri:window.location.origin }); }catch(e){} };
     pca.handleRedirectPromise().then(function(res){
       var acct=(res&&res.account)?res.account:(pca.getAllAccounts()[0]||null);
